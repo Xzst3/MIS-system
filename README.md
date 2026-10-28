@@ -3,7 +3,7 @@
 Two English web experiences, one shared Neon Postgres database:
 
 - Public portal: mission, seven service areas, resource library, support requests, volunteer/partner interest and donation pledges.
-- Team workspace: invitation-based login, role-based access, client pathways, referrals, donors, partners, volunteers, tasks, CSV exports and reports.
+- Team workspace: username/password login, role-based access, client pathways, referrals, donors, partners, volunteers, tasks, CSV exports and reports.
 - Demo workspace: fictional records in browser storage, completely separate from live database records.
 
 ## Project location
@@ -42,12 +42,16 @@ Next.js loads .env.local for serving. The migration command loads it explicitly.
 | /workspace          | Protected operational workspace             |
 | /demo               | Interactive fictional preview               |
 
-## First administrator
+## Virtual demonstration accounts
+
+Run npm run accounts:seed once after configuring the database. This creates four fictional username/password accounts: admin, coordinator, fundraising and volunteer. Private generated passwords are saved in .local/TEST_ACCOUNTS.md and are never committed. No real email address is required. The bootstrap is resumable and never changes existing account passwords.
+
+## Additional administrator invitations
 
 Run this after a deployment URL is known:
-npm run admin:create -- --email=your-email@example.com --origin=https://your-deployment.example --name="Your Name"
+npm run admin:create -- --username=new.admin --origin=https://your-deployment.example --name="Your Name"
 
-This creates an administrator with no password and saves a private, 24-hour activation link in .local/admin-invitation.txt. Open the link and choose a password of at least 12 characters. Never commit or publicly share the link. The administrator can invite teammates, choose roles, reissue activation links for password resets and deactivate accounts. Invitations are not emailed automatically.
+This creates a username-based administrator with no password and saves a private, 24-hour activation link in .local/admin-invitation.txt. Open the link and choose a password of at least 12 characters. Never commit or publicly share the link. The administrator can invite teammates, choose roles, reissue activation links for password resets and deactivate accounts. Invitations are shared privately; usernames do not need an email address.
 
 ## Access model
 
@@ -62,7 +66,7 @@ Every data request checks the authenticated user on the server. Changing the UI 
 
 ## Database and initial data flow
 
-- users: team identities, roles, salted password hashes and active state.
+- users: virtual usernames, display names, roles, salted password hashes and active state.
 - sessions: hashed opaque session tokens with eight-hour expiry.
 - invitations: hashed one-time tokens with 24-hour expiry.
 - records: clients, referrals, donors, partners, volunteers and tasks.
@@ -70,7 +74,7 @@ Every data request checks the authenticated user on the server. Changing the UI 
 - audit_log: staff record mutations and account administration.
 - rate_limits: shared persistent request counters.
 
-A support request creates a client record marked New. Volunteer/partner interest creates a volunteer interest record marked New. A donation pledge creates a donor record marked Pledged. Staff can review, add coordination notes at creation, update status, assign tasks and export authorized records. Public submission receipt and business record are inserted in one database transaction.
+A support request creates a client record marked New. Volunteer/partner interest creates a volunteer interest record marked New. A donation pledge creates a donor record marked Pledged. Staff can review and edit record details and coordination notes, update status, assign tasks and export authorized records. Public submission receipt and business record are inserted in one database transaction.
 
 This first phase deliberately uses a compact shared records model. A subsequent business analysis can normalize client assessments, referral relationships, provider vetting, household contacts, recurring gifts and product fulfillment without changing the two-entry-point approach.
 
@@ -93,7 +97,7 @@ The integration script only targets localhost. It creates randomly named tempora
 
 - Donations are pledges and manual staff records. No online payment is charged. An approved HTTPS hosted checkout may optionally be linked through NEXT_PUBLIC_DONATION_URL.
 - Resource articles are readable now. Paid e-guides, automatic delivery, auctions and event checkout are future work; none are presented as active.
-- Email delivery, self-service password recovery and automated scheduling are not configured. Administrators share activation links privately.
+- Self-service password recovery and automated scheduling are not configured. Administrators share activation links privately.
 - No real partner names, testimonials, impact metrics or events are fabricated on the public portal.
 - The foundation must confirm its privacy contact, retention schedule and detailed operating workflows before using this as a complete production case-management service.
 - List pages currently return the latest 500 records in each authorized section. Reports and exports reflect these loaded records.

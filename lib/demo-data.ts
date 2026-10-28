@@ -2,7 +2,7 @@ import type { Dataset, User } from "./types";
 export const demoUser: User = {
   id: "00000000-0000-4000-8000-000000000001",
   name: "Alex Morgan",
-  email: "alex@example.test",
+  username: "alex.morgan",
   role: "admin",
 };
 const date = (month: number, day = 15) =>

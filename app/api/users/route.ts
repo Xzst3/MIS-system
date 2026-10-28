@@ -12,7 +12,7 @@ export async function GET() {
     );
   const sql = database();
   const rows =
-    await sql`SELECT id,name,email,role,active,(password_hash IS NOT NULL) AS activated FROM users ORDER BY created_at`;
+    await sql`SELECT id,name,username,role,active,(password_hash IS NOT NULL) AS activated FROM users ORDER BY created_at`;
   return NextResponse.json(rows, { headers: { "Cache-Control": "no-store" } });
 }
 export async function POST(request: Request) {
@@ -71,14 +71,19 @@ export async function POST(request: Request) {
     const data = z
       .object({
         name: z.string().trim().min(2).max(100),
-        email: z.email().max(254),
+        username: z
+          .string()
+          .trim()
+          .min(3)
+          .max(32)
+          .regex(/^[a-zA-Z0-9][a-zA-Z0-9._-]+$/),
         role: z.enum(["admin", "coordinator", "fundraising", "volunteer"]),
       })
       .parse(body);
     const token = randomBytes(32).toString("hex");
     const rows = await sql`WITH invited AS (
-      INSERT INTO users(name,email,role) VALUES(${data.name},${data.email.toLowerCase()},${data.role})
-      ON CONFLICT(email) DO NOTHING RETURNING id
+      INSERT INTO users(name,username,role) VALUES(${data.name},${data.username.toLowerCase()},${data.role})
+      ON CONFLICT(username) DO NOTHING RETURNING id
     ), issued AS (
       INSERT INTO invitations(token_hash,user_id,expires_at)
       SELECT ${digest(token)},id,NOW()+INTERVAL '24 hours' FROM invited RETURNING user_id
@@ -87,7 +92,7 @@ export async function POST(request: Request) {
     SELECT ${user.id},${"Invited " + data.role + " account"},user_id FROM issued RETURNING record_id`;
     if (!rows[0])
       return NextResponse.json(
-        { error: "An account with this email already exists." },
+        { error: "An account with this username already exists." },
         { status: 409 },
       );
     return NextResponse.json({

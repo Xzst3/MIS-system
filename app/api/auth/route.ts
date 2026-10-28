@@ -75,17 +75,22 @@ export async function POST(request: Request) {
     }
     const data = z
       .object({
-        email: z.email().max(254),
+        username: z
+          .string()
+          .trim()
+          .min(3)
+          .max(32)
+          .regex(/^[a-zA-Z0-9][a-zA-Z0-9._-]+$/),
         password: z.string().min(1).max(128),
       })
       .parse(body);
-    if (!(await rateLimit(`login:${data.email.toLowerCase()}`, 10)))
+    if (!(await rateLimit(`login:${data.username.toLowerCase()}`, 10)))
       return NextResponse.json(
         { error: "Too many attempts. Please try again in 15 minutes." },
         { status: 429 },
       );
     const rows =
-      await sql`SELECT id,password_hash FROM users WHERE email=${data.email.toLowerCase()} AND active=true`;
+      await sql`SELECT id,password_hash FROM users WHERE username=${data.username.toLowerCase()} AND active=true`;
     const valid = await verifyPassword(
       data.password,
       rows[0]?.password_hash ||
@@ -93,7 +98,7 @@ export async function POST(request: Request) {
     );
     if (!rows[0] || !valid)
       return NextResponse.json(
-        { error: "The email or password is incorrect." },
+        { error: "The username or password is incorrect." },
         { status: 401 },
       );
     await createSession(String(rows[0].id));
@@ -103,7 +108,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           error:
-            "Enter a valid email and password. Passwords must be at least 12 characters when activating an account.",
+            "Enter a valid username and password. Passwords must be at least 12 characters when activating an account.",
         },
         { status: 400 },
       );

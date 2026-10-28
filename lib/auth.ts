@@ -31,7 +31,7 @@ export async function currentUser(): Promise<User | null> {
   if (!token || !databaseReady()) return null;
   const sql = database();
   const rows =
-    await sql`SELECT u.id, u.name, u.email, u.role FROM sessions s JOIN users u ON u.id=s.user_id WHERE s.token_hash=${digest(token)} AND s.expires_at>NOW() AND u.active=true`;
+    await sql`SELECT u.id, u.name, u.username, u.role FROM sessions s JOIN users u ON u.id=s.user_id WHERE s.token_hash=${digest(token)} AND s.expires_at>NOW() AND u.active=true`;
   return (rows[0] as User) || null;
 }
 export async function createSession(userId: string) {

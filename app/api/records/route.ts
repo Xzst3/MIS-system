@@ -61,6 +61,27 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const sql = database();
+    if (body.operation === "edit") {
+      const data = recordSchema.extend({ id: z.uuid() }).parse(body);
+      if (!canWrite(user.role, data.kind) || user.role === "volunteer")
+        return NextResponse.json(
+          { error: "You do not have permission to edit this record." },
+          { status: 403 },
+        );
+      const rows = await sql`WITH updated AS (
+        UPDATE records SET name=${data.name}, email=${data.email || null}, category=${data.category},
+        status=${data.status}, detail=${data.detail}, amount=${data.kind === "donors" ? (data.amount ?? null) : null},
+        assigned_to=${data.assigned_to || null}, updated_at=NOW()
+        WHERE id=${data.id} AND kind=${data.kind} RETURNING id
+      ) INSERT INTO audit_log(user_id,action,record_id)
+        SELECT ${user.id},${"Edited " + data.kind + " details"},id FROM updated RETURNING record_id`;
+      if (!rows[0])
+        return NextResponse.json(
+          { error: "Record not found." },
+          { status: 404 },
+        );
+      return NextResponse.json({ ok: true });
+    }
     if (body.id) {
       const data = z
         .object({

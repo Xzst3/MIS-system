@@ -6,6 +6,7 @@ if (!/^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(origin))
   throw new Error("Integration tests must target a local test server.");
 const sql = neon(process.env.DATABASE_URL);
 const suffix = randomBytes(8).toString("hex");
+const username = (role) => "t-" + suffix.slice(0, 8) + "-" + role;
 const email = (role) => `ecf-test-${suffix}-${role}@example.test`;
 const password = randomBytes(24).toString("base64url");
 const salt = randomBytes(16).toString("hex");
@@ -16,7 +17,7 @@ const cookies = {};
 const checks = [];
 const hash = (s) => createHash("sha256").update(s).digest("hex");
 async function request(path, body, cookie, customOrigin = origin) {
-  return fetch(origin + path, {
+  const options = {
     method: body ? "POST" : "GET",
     headers: {
       ...(body
@@ -26,18 +27,28 @@ async function request(path, body, cookie, customOrigin = origin) {
       "X-Forwarded-For": "test-" + suffix,
     },
     ...(body ? { body: JSON.stringify(body) } : {}),
-  });
+  };
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const response = await fetch(origin + path, options);
+    if (response.status < 500 || attempt === 2) return response;
+    await response.text();
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+  }
 }
 function check(name, condition) {
   assert.ok(condition, name);
   checks.push(name);
+  console.log("  PASS " + name);
 }
 try {
   for (const role of ["admin", "coordinator", "fundraising", "volunteer"]) {
     const rows =
-      await sql`INSERT INTO users(name,email,role,password_hash) VALUES(${"Integration " + role},${email(role)},${role},${passwordHash}) RETURNING id`;
+      await sql`INSERT INTO users(name,username,role,password_hash) VALUES(${"Integration " + role},${username(role)},${role},${passwordHash}) RETURNING id`;
     users[role] = String(rows[0].id);
-    const login = await request("/api/auth", { email: email(role), password });
+    const login = await request("/api/auth", {
+      username: username(role),
+      password,
+    });
     check(role + " can sign in", login.status === 200);
     cookies[role] = login.headers.get("set-cookie").split(";")[0];
   }
@@ -170,6 +181,54 @@ try {
         Number(d.amount) === 50,
     ),
   );
+  const pledge = donorData.donors.find((d) => d.email === email("public"));
+  check(
+    "fundraising can edit donor details",
+    (
+      await request(
+        "/api/records",
+        {
+          operation: "edit",
+          id: pledge.id,
+          kind: "donors",
+          name: "ECF Updated Test",
+          email: email("public"),
+          category: "Individual giving",
+          status: "Pledged",
+          detail: "Updated test note",
+          amount: 75,
+        },
+        cookies.fundraising,
+      )
+    ).status === 200,
+  );
+  const updatedPledge =
+    await sql`SELECT name,amount FROM records WHERE id=${pledge.id}`;
+  check(
+    "edited donor details persist",
+    updatedPledge[0].name === "ECF Updated Test" &&
+      Number(updatedPledge[0].amount) === 75,
+  );
+  check(
+    "volunteer cannot edit donor details",
+    (
+      await request(
+        "/api/records",
+        {
+          operation: "edit",
+          id: pledge.id,
+          kind: "donors",
+          name: "ECF Blocked Test",
+          email: email("public"),
+          category: "Test",
+          status: "Pledged",
+          detail: "",
+          amount: 1,
+        },
+        cookies.volunteer,
+      )
+    ).status === 403,
+  );
   check(
     "consent is required",
     (
@@ -197,7 +256,11 @@ try {
   );
   const invitationResponse = await request(
     "/api/users",
-    { name: "ECF Invited Test", email: email("invited"), role: "volunteer" },
+    {
+      name: "ECF Invited Test",
+      username: username("invited"),
+      role: "volunteer",
+    },
     cookies.admin,
   );
   const invitation = await invitationResponse.json();
@@ -221,7 +284,7 @@ try {
       .status === 400,
   );
   const invited =
-    await sql`SELECT id FROM users WHERE email=${email("invited")}`;
+    await sql`SELECT id FROM users WHERE username=${username("invited")}`;
   const invitedCookie = activation.headers.get("set-cookie").split(";")[0];
   check(
     "administrator can deactivate teammate",
@@ -257,7 +320,11 @@ try {
     (await request("/api/records", null, cookies.volunteer)).status === 401,
   );
   console.log("Integration checks passed: " + checks.length);
-  for (const name of checks) console.log("  PASS " + name);
+} catch (error) {
+  console.error(
+    "Integration stopped after " + checks.length + " passed checks.",
+  );
+  throw error;
 } finally {
   const emails = [
     "admin",
@@ -267,21 +334,37 @@ try {
     "invited",
     "public",
   ].map(email);
-  await sql.transaction([
-    sql`DELETE FROM audit_log WHERE user_id IN (SELECT id FROM users WHERE email=ANY(${emails}))`,
-    sql`DELETE FROM records WHERE created_by IN (SELECT id FROM users WHERE email=ANY(${emails})) OR email=ANY(${emails})`,
-    sql`DELETE FROM submissions WHERE email=ANY(${emails})`,
-    sql`DELETE FROM users WHERE email=ANY(${emails})`,
-  ]);
-  for (const prefix of ["auth:", "intake:"]) {
-    const digest = hash(prefix + "test-" + suffix) + ":%";
-    await sql`DELETE FROM rate_limits WHERE key LIKE ${digest}`;
-  }
-  for (const role of ["admin", "coordinator", "fundraising", "volunteer"]) {
-    const digest = hash("login:" + email(role)) + ":%";
-    await sql`DELETE FROM rate_limits WHERE key LIKE ${digest}`;
-  }
-  console.log(
-    "Temporary integration users, records and requests were removed.",
+  const usernames = [
+    "admin",
+    "coordinator",
+    "fundraising",
+    "volunteer",
+    "invited",
+  ].map(username);
+  const patterns = ["auth:", "intake:"].map(
+    (prefix) => hash(prefix + "test-" + suffix) + ":%",
   );
+  for (const role of ["admin", "coordinator", "fundraising", "volunteer"])
+    patterns.push(hash("login:" + username(role)) + ":%");
+  let cleaned = false;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      await sql.transaction([
+        sql`DELETE FROM audit_log WHERE user_id IN (SELECT id FROM users WHERE username=ANY(${usernames}))`,
+        sql`DELETE FROM records WHERE created_by IN (SELECT id FROM users WHERE username=ANY(${usernames})) OR email=ANY(${emails})`,
+        sql`DELETE FROM submissions WHERE email=ANY(${emails})`,
+        sql`DELETE FROM users WHERE username=ANY(${usernames})`,
+        sql`DELETE FROM rate_limits WHERE key LIKE ANY(${patterns}::text[])`,
+      ]);
+      cleaned = true;
+      break;
+    } catch (error) {
+      if (attempt === 2) throw error;
+      await new Promise((resolve) => setTimeout(resolve, 1000 * (attempt + 1)));
+    }
+  }
+  if (cleaned)
+    console.log(
+      "Temporary integration users, records and requests were removed.",
+    );
 }

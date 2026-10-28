@@ -1,6 +1,6 @@
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 CREATE TABLE IF NOT EXISTS users (
- id UUID PRIMARY KEY DEFAULT gen_random_uuid(), name TEXT NOT NULL, email TEXT UNIQUE NOT NULL,
+ id UUID PRIMARY KEY DEFAULT gen_random_uuid(), name TEXT NOT NULL, username TEXT UNIQUE NOT NULL, email TEXT UNIQUE,
  role TEXT NOT NULL CHECK(role IN ('admin','coordinator','fundraising','volunteer')),
  password_hash TEXT, active BOOLEAN NOT NULL DEFAULT true, created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
@@ -18,3 +18,9 @@ CREATE INDEX IF NOT EXISTS records_assignment ON records(assigned_to);
 CREATE TABLE IF NOT EXISTS submissions (id UUID PRIMARY KEY DEFAULT gen_random_uuid(),kind TEXT NOT NULL,name TEXT NOT NULL,email TEXT NOT NULL,category TEXT NOT NULL,amount NUMERIC(12,2),consent_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),created_at TIMESTAMPTZ NOT NULL DEFAULT NOW());
 CREATE TABLE IF NOT EXISTS audit_log (id BIGSERIAL PRIMARY KEY,user_id UUID REFERENCES users(id),action TEXT NOT NULL,record_id UUID,created_at TIMESTAMPTZ NOT NULL DEFAULT NOW());
 CREATE TABLE IF NOT EXISTS rate_limits (key TEXT PRIMARY KEY,attempts INTEGER NOT NULL DEFAULT 1,expires_at TIMESTAMPTZ NOT NULL);
+
+ALTER TABLE users ADD COLUMN IF NOT EXISTS username TEXT;
+UPDATE users SET username=lower(split_part(email,'@',1)) WHERE username IS NULL;
+ALTER TABLE users ALTER COLUMN email DROP NOT NULL;
+CREATE UNIQUE INDEX IF NOT EXISTS users_username_unique ON users(username);
+ALTER TABLE users ALTER COLUMN username SET NOT NULL;

@@ -32,7 +32,7 @@ export function AuthForm({ activate = false }: { activate?: boolean }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           action: activate ? "activate" : "login",
-          email: data.get("email"),
+          username: data.get("username"),
           password: data.get("password"),
           token,
         }),
@@ -84,14 +84,17 @@ export function AuthForm({ activate = false }: { activate?: boolean }) {
           <form onSubmit={submit}>
             {!activate && (
               <label className="field">
-                Email address
+                Username
                 <input
-                  name="email"
-                  type="email"
+                  name="username"
+                  type="text"
                   autoComplete="username"
-                  placeholder="you@your-organization.org"
+                  placeholder="e.g. admin"
                   required
-                  maxLength={254}
+                  minLength={3}
+                  maxLength={32}
+                  autoCapitalize="none"
+                  spellCheck={false}
                 />
               </label>
             )}

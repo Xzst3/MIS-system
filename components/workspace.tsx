@@ -147,6 +147,7 @@ export function Workspace({
   const [status, setStatus] = useState("All statuses");
   const [mobile, setMobile] = useState(false);
   const [create, setCreate] = useState<Kind | null>(null);
+  const [editing, setEditing] = useState<RecordRow | null>(null);
   const [selected, setSelected] = useState<{
     kind: Kind;
     record: RecordRow;
@@ -329,6 +330,7 @@ export function Workspace({
     const form = new FormData(e.currentTarget);
     const payload = {
       kind: create,
+      ...(editing ? { id: editing.id, operation: "edit" } : {}),
       name: String(form.get("name")),
       email: String(form.get("email") || ""),
       category: String(form.get("category")),
@@ -341,10 +343,15 @@ export function Workspace({
       if (demo) {
         const record = {
           ...payload,
-          id: crypto.randomUUID(),
-          created_at: new Date().toISOString(),
+          id: editing?.id || crypto.randomUUID(),
+          created_at: editing?.created_at || new Date().toISOString(),
         } as RecordRow;
-        setData((d) => ({ ...d, [create]: [record, ...d[create]] }));
+        setData((d) => ({
+          ...d,
+          [create]: editing
+            ? d[create].map((r) => (r.id === editing.id ? record : r))
+            : [record, ...d[create]],
+        }));
         showToast("Demo record saved in this browser.");
       } else {
         const r = await fetch("/api/records", {
@@ -358,6 +365,7 @@ export function Workspace({
         showToast("Record saved.");
       }
       setCreate(null);
+      setEditing(null);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Unable to save this record.");
     } finally {
@@ -420,7 +428,7 @@ export function Workspace({
     const form = new FormData(e.currentTarget);
     const payload = {
       name: form.get("name"),
-      email: form.get("email"),
+      username: form.get("username"),
       role: form.get("role"),
     };
     try {
@@ -1276,7 +1284,7 @@ export function Workspace({
                           </span>
                           <div>
                             <strong>{account.name}</strong>
-                            <small>{account.email}</small>
+                            <small>@{account.username}</small>
                           </div>
                           <span className="badge">{account.role}</span>
                           <small style={{ color: "#8a977d", fontSize: 9 }}>
@@ -1313,7 +1321,7 @@ export function Workspace({
                       }}
                     >
                       Invitations expire after 24 hours. Share invitation links
-                      privately; no email is sent automatically.
+                      privately. Accounts use usernames, not email addresses.
                     </p>
                   </div>
                   {invitation && (
@@ -1383,9 +1391,10 @@ export function Workspace({
       </div>
       {create && (
         <Modal
-          title={"Add " + titles[create].singular}
+          title={(editing ? "Edit " : "Add ") + titles[create].singular}
           onClose={() => {
             setCreate(null);
+            setEditing(null);
             setError("");
           }}
         >
@@ -1398,6 +1407,7 @@ export function Workspace({
                   : "Full name / organization"}
               <input
                 name="name"
+                defaultValue={editing?.name || ""}
                 required
                 minLength={2}
                 maxLength={100}
@@ -1407,7 +1417,12 @@ export function Workspace({
             {create !== "tasks" && create !== "referrals" && (
               <label className="field">
                 Email address
-                <input name="email" type="email" maxLength={254} />
+                <input
+                  name="email"
+                  type="email"
+                  maxLength={254}
+                  defaultValue={editing?.email || ""}
+                />
               </label>
             )}
             <div className="detail-grid">
@@ -1417,6 +1432,7 @@ export function Workspace({
                   : "Support area / category"}
                 <input
                   name="category"
+                  defaultValue={editing?.category || ""}
                   required
                   maxLength={100}
                   placeholder={
@@ -1430,7 +1446,9 @@ export function Workspace({
                 Status
                 <select
                   name="status"
-                  defaultValue={create === "donors" ? "Pledged" : "New"}
+                  defaultValue={
+                    editing?.status || (create === "donors" ? "Pledged" : "New")
+                  }
                 >
                   {statuses.map((s) => (
                     <option key={s}>{s}</option>
@@ -1444,6 +1462,7 @@ export function Workspace({
                 <input
                   type="number"
                   name="amount"
+                  defaultValue={editing?.amount || 0}
                   min="0"
                   max="1000000"
                   step="0.01"
@@ -1458,7 +1477,10 @@ export function Workspace({
             {create === "tasks" && (
               <label className="field">
                 Assign to
-                <select name="assigned_to" defaultValue="">
+                <select
+                  name="assigned_to"
+                  defaultValue={editing?.assigned_to || ""}
+                >
                   <option value="">Unassigned</option>
                   {assignees.map((a) => (
                     <option key={a.id} value={a.id}>
@@ -1475,6 +1497,7 @@ export function Workspace({
               Coordination notes
               <textarea
                 name="detail"
+                defaultValue={editing?.detail || ""}
                 maxLength={1000}
                 rows={3}
                 placeholder="Keep notes brief, factual and relevant."
@@ -1547,6 +1570,20 @@ export function Workspace({
           <div className="field-hint">
             Record reference: {selected.record.id}
           </div>
+          {role !== "volunteer" && canWrite(role, selected.kind) && (
+            <button
+              className="button button-dark"
+              style={{ width: "100%", marginTop: 22 }}
+              onClick={() => {
+                setEditing(selected.record);
+                setCreate(selected.kind);
+                setSelected(null);
+                setError("");
+              }}
+            >
+              Edit details <ArrowUpRight size={15} />
+            </button>
+          )}
         </Modal>
       )}
       {invite && (
@@ -1557,8 +1594,17 @@ export function Workspace({
               <input name="name" required minLength={2} maxLength={100} />
             </label>
             <label className="field">
-              Email address
-              <input name="email" type="email" required maxLength={254} />
+              Username
+              <input
+                name="username"
+                type="text"
+                required
+                minLength={3}
+                maxLength={32}
+                pattern="[a-zA-Z0-9][a-zA-Z0-9._-]+"
+                autoCapitalize="none"
+                spellCheck={false}
+              />
             </label>
             <label className="field">
               Team role
