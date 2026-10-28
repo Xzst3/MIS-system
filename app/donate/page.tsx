@@ -42,8 +42,8 @@ export default function Page() {
                 <div className="task-item" key={String(t)}>
                   <I size={22} strokeWidth={1.3} />
                   <div>
-                    <strong style={{ fontSize: 15 }}>{String(t)}</strong>
-                    <p style={{ fontSize: 12 }}>{String(d)}</p>
+                    <strong style={{ fontSize: 18 }}>{String(t)}</strong>
+                    <p style={{ fontSize: 16 }}>{String(d)}</p>
                   </div>
                 </div>
               );

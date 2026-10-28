@@ -21,7 +21,7 @@ body {
   margin: 0;
   color: var(--green);
   background: var(--cream);
-  font: 16px/1.65 var(--sans);
+  font: 18px/1.65 var(--sans);
   -webkit-font-smoothing: antialiased;
 }
 a {
@@ -76,7 +76,7 @@ h2 {
 }
 h3 {
   font-family: var(--serif);
-  font-size: 26px;
+  font-size: 29px;
   font-weight: 400;
   letter-spacing: -0.4px;
   line-height: 1.22;
@@ -114,13 +114,13 @@ textarea:focus-visible {
   padding-block: 106px;
 }
 .eyebrow {
-  font-size: 10px;
+  font-size: 15px;
   line-height: 1.5;
   font-weight: 600;
   letter-spacing: 1.8px;
 }
 .section-number {
-  font-size: 9px;
+  font-size: 15px;
   letter-spacing: 1.5px;
   color: #778174;
 }
@@ -146,7 +146,7 @@ textarea:focus-visible {
   padding: 15px 23px;
   border-radius: 5px;
   line-height: 1.4;
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 500;
   transition:
     transform 0.25s,
@@ -175,7 +175,7 @@ textarea:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: 23px;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 600;
   border-bottom: 1px solid #a5ad9d;
   padding-bottom: 7px;
@@ -202,7 +202,7 @@ textarea:focus-visible {
   background: var(--green);
   color: #f9f7eb;
   text-align: center;
-  font-size: 10px;
+  font-size: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -239,16 +239,16 @@ textarea:focus-visible {
 }
 .brand > span {
   font-family: var(--serif);
-  font-size: 20px;
+  font-size: 22px;
   letter-spacing: -0.5px;
 }
 .brand span span {
-  font-size: 18px;
+  font-size: 20px;
 }
 .main-nav {
   display: flex;
   gap: 31px;
-  font-size: 12px;
+  font-size: 16px;
 }
 .main-nav a {
   padding-block: 8px;
@@ -269,7 +269,7 @@ textarea:focus-visible {
   width: 100%;
 }
 .nav-donate {
-  font-size: 11px;
+  font-size: 16px;
   padding: 12px 18px;
   gap: 15px;
 }
@@ -296,12 +296,12 @@ textarea:focus-visible {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 9px;
+  font-size: 15px;
   letter-spacing: 1.6px;
   margin-bottom: 26px;
 }
 .tiny-sun {
-  font-size: 23px;
+  font-size: 26px;
   color: var(--orange);
   line-height: 1;
 }
@@ -313,7 +313,7 @@ textarea:focus-visible {
 }
 .hero-copy > p {
   max-width: 390px;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1.85;
 }
 .hero-actions {
@@ -326,7 +326,7 @@ textarea:focus-visible {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 11px;
+  font-size: 16px;
 }
 .hero-assurance {
   display: flex;
@@ -334,7 +334,7 @@ textarea:focus-visible {
   align-items: center;
   margin-top: 39px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 15px;
   line-height: 1.6;
 }
 .hero-assurance strong {
@@ -374,7 +374,7 @@ textarea:focus-visible {
   right: 0;
   padding: 30px 25px 23px;
   background: linear-gradient(transparent, #203a2ba1);
-  font-size: 8px;
+  font-size: 14px;
   letter-spacing: 1.2px;
   color: white;
   display: flex;
@@ -400,7 +400,7 @@ textarea:focus-visible {
   align-items: center;
   box-shadow: 0 12px 45px #203a2b12;
   transform: rotate(-4deg);
-  font-size: 11px;
+  font-size: 16px;
   line-height: 1.7;
   animation: float-note 7s ease-in-out infinite;
 }
@@ -439,7 +439,7 @@ textarea:focus-visible {
   gap: 20px;
   align-items: center;
   padding-block: 22px;
-  font-size: 11px;
+  font-size: 16px;
 }
 .principle-strip span {
   display: flex;
@@ -448,7 +448,7 @@ textarea:focus-visible {
 }
 .principle-strip span:first-child {
   font-family: var(--serif);
-  font-size: 18px;
+  font-size: 20px;
   letter-spacing: -0.2px;
 }
 .principle-strip svg {
@@ -464,13 +464,13 @@ textarea:focus-visible {
 }
 .intro-grid .large-copy {
   font-family: var(--serif);
-  font-size: 25px;
+  font-size: 28px;
   line-height: 1.4;
   color: var(--green);
   margin-bottom: 20px;
 }
 .intro-grid p:not(.large-copy) {
-  font-size: 13px;
+  font-size: 18px;
   line-height: 1.9;
 }
 .intro-grid .text-link {
@@ -504,19 +504,19 @@ textarea:focus-visible {
   position: absolute;
   right: 25px;
   top: 25px;
-  font: 11px var(--serif);
+  font: 16px var(--serif);
   color: #99a38f;
 }
 .service-icon {
   margin-bottom: 35px;
 }
 .service-card h3 {
-  font-size: 25px;
+  font-size: 28px;
   max-width: 250px;
   margin-bottom: 15px;
 }
 .service-card p {
-  font-size: 12px;
+  font-size: 16px;
   line-height: 1.8;
   max-width: 290px;
 }
@@ -530,7 +530,7 @@ textarea:focus-visible {
   align-items: center;
   justify-content: center;
   gap: 25px;
-  font-size: 10px;
+  font-size: 15px;
   margin-top: 24px;
 }
 .service-other a {
@@ -549,7 +549,7 @@ textarea:focus-visible {
   font-size: 49px;
 }
 .journey-heading p {
-  font-size: 13px;
+  font-size: 18px;
   max-width: 340px;
   margin-top: 24px;
 }
@@ -573,7 +573,7 @@ textarea:focus-visible {
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  font: 13px var(--serif);
+  font: 18px var(--serif);
   background: var(--cream);
   position: relative;
   z-index: 1;
@@ -588,11 +588,11 @@ textarea:focus-visible {
   background: #d6ddcb;
 }
 .journey-step h3 {
-  font-size: 26px;
+  font-size: 29px;
   margin: 3px 0 10px;
 }
 .journey-step p {
-  font-size: 12px;
+  font-size: 16px;
   line-height: 1.8;
   max-width: 360px;
 }
@@ -632,7 +632,7 @@ textarea:focus-visible {
 }
 .community-copy p {
   color: #c2cabb;
-  font-size: 13px;
+  font-size: 18px;
   max-width: 380px;
   margin-bottom: 28px;
 }
@@ -644,7 +644,7 @@ textarea:focus-visible {
   margin-top: 38px;
   padding-top: 22px;
   color: #c2cabb;
-  font-size: 10px;
+  font-size: 15px;
 }
 .resource-grid {
   display: grid;
@@ -678,13 +678,13 @@ textarea:focus-visible {
   color: #85774d;
 }
 .cover-label {
-  font-size: 7px;
+  font-size: 14px;
   letter-spacing: 1.5px;
   align-self: flex-start;
   line-height: 1.7;
 }
 .cover-bottom {
-  font-size: 8px;
+  font-size: 14px;
   letter-spacing: 1.6px;
   display: flex;
   align-items: center;
@@ -725,7 +725,7 @@ textarea:focus-visible {
   padding-top: 24px;
 }
 .resource-info .eyebrow {
-  font-size: 8px;
+  font-size: 14px;
   letter-spacing: 1.1px;
 }
 .resource-info .eyebrow span {
@@ -734,16 +734,16 @@ textarea:focus-visible {
   color: var(--muted);
 }
 .resource-info h3 {
-  font-size: 25px;
+  font-size: 28px;
   margin: 13px 0;
 }
 .resource-info p {
-  font-size: 12px;
+  font-size: 16px;
   line-height: 1.8;
 }
 .resource-info .text-link {
   margin-top: 20px;
-  font-size: 10px;
+  font-size: 15px;
 }
 .donation-banner {
   margin-bottom: 100px;
@@ -760,7 +760,7 @@ textarea:focus-visible {
   margin: 20px 0;
 }
 .donation-banner p {
-  font-size: 12px;
+  font-size: 16px;
   max-width: 420px;
 }
 .donation-banner > .button {
@@ -787,16 +787,16 @@ textarea:focus-visible {
   padding-bottom: 55px;
 }
 .footer-top > div > p {
-  font-size: 12px;
+  font-size: 16px;
   margin-top: 20px;
 }
 .footer-top > div:not(:first-child) > a {
   display: block;
-  font-size: 11px;
+  font-size: 16px;
   margin-top: 13px;
 }
 .footer-top .eyebrow {
-  font-size: 8px;
+  font-size: 14px;
   letter-spacing: 1.3px;
   display: block;
   margin-bottom: 23px;
@@ -806,19 +806,19 @@ textarea:focus-visible {
   padding-left: 35px;
 }
 .footer-invitation > p {
-  font: 23px/1.3 var(--serif) !important;
+  font: 26px/1.3 var(--serif) !important;
   color: var(--green);
   margin-top: 0 !important;
 }
 .footer-invitation .text-link {
   display: inline-flex !important;
-  font-size: 10px !important;
+  font-size: 15px !important;
 }
 .footer-bottom {
   display: flex;
   justify-content: space-between;
   gap: 25px;
-  font-size: 9px;
+  font-size: 15px;
   padding-block: 21px;
   border-top: 1px solid #ccd4c0;
   color: #6b7561;
@@ -833,7 +833,7 @@ textarea:focus-visible {
   gap: 5px;
 }
 .footer-note {
-  font-size: 8px;
+  font-size: 14px;
   color: #77816c;
   padding-bottom: 20px;
 }
@@ -852,7 +852,7 @@ textarea:focus-visible {
 .page-hero > p {
   max-width: 600px;
   margin: 25px auto 0;
-  font-size: 15px;
+  font-size: 18px;
 }
 .page-hero .button {
   margin-top: 25px;
@@ -876,7 +876,7 @@ textarea:focus-visible {
 }
 .story-grid p {
   margin-top: 20px;
-  font-size: 14px;
+  font-size: 18px;
 }
 .service-list {
   display: grid;
@@ -895,17 +895,17 @@ textarea:focus-visible {
   color: #7a8b6d;
 }
 .service-detail h3 {
-  font-size: 29px;
+  font-size: 32px;
 }
 .service-detail p {
-  font-size: 13px;
+  font-size: 18px;
   margin-block: 15px 22px;
 }
 .notice {
   padding: 22px 25px;
   background: #eff1e8;
   border-left: 3px solid #83906f;
-  font-size: 12px;
+  font-size: 16px;
   line-height: 1.8;
   color: var(--muted);
   margin-block: 30px;
@@ -916,7 +916,7 @@ textarea:focus-visible {
   margin-inline: auto;
 }
 .faq h2 {
-  font-size: 42px;
+  font-size: 45px;
   margin-bottom: 30px;
 }
 .faq details {
@@ -925,10 +925,10 @@ textarea:focus-visible {
 }
 .faq summary {
   cursor: pointer;
-  font: 22px/1.4 var(--serif);
+  font: 25px/1.4 var(--serif);
 }
 .faq details p {
-  font-size: 13px;
+  font-size: 18px;
   margin-top: 15px;
 }
 .form-layout {
@@ -946,7 +946,7 @@ textarea:focus-visible {
   font-size: 62px;
 }
 .form-intro > p {
-  font-size: 14px;
+  font-size: 18px;
   margin-top: 25px;
   max-width: 430px;
 }
@@ -965,12 +965,12 @@ textarea:focus-visible {
   box-shadow: 0 10px 30px #283f3105;
 }
 .form-card h2 {
-  font-size: 31px;
+  font-size: 34px;
   letter-spacing: -1px;
   margin-bottom: 10px;
 }
 .form-card > p {
-  font-size: 12px;
+  font-size: 16px;
   margin-bottom: 25px;
 }
 .field {
@@ -978,7 +978,7 @@ textarea:focus-visible {
   flex-direction: column;
   gap: 7px;
   margin-bottom: 19px;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 500;
 }
 .field input,
@@ -991,7 +991,7 @@ textarea:focus-visible {
   border-radius: 4px;
   color: var(--green);
   width: 100%;
-  font-size: 13px;
+  font-size: 18px;
   min-height: 45px;
 }
 .field input::placeholder,
@@ -1003,7 +1003,7 @@ textarea:focus-visible {
   min-height: 95px;
 }
 .field-hint {
-  font-size: 10px;
+  font-size: 15px;
   color: var(--muted);
   font-weight: 400;
 }
@@ -1011,7 +1011,7 @@ textarea:focus-visible {
   display: flex;
   gap: 10px;
   align-items: flex-start;
-  font-size: 10px;
+  font-size: 15px;
   color: var(--muted);
   line-height: 1.7;
   margin-block: 20px;
@@ -1039,7 +1039,7 @@ textarea:focus-visible {
   background: #fff0e8;
   color: #984c35;
   padding: 12px;
-  font-size: 12px;
+  font-size: 16px;
   border-radius: 4px;
   margin-block: 12px;
 }
@@ -1052,11 +1052,11 @@ textarea:focus-visible {
   margin: auto auto 20px;
 }
 .form-success h2 {
-  font-size: 33px;
+  font-size: 36px;
   margin-bottom: 20px;
 }
 .form-success p {
-  font-size: 13px;
+  font-size: 18px;
 }
 .form-success .text-link {
   margin-top: 30px;
@@ -1072,7 +1072,7 @@ textarea:focus-visible {
   background: transparent;
   border: 1px solid var(--line);
   border-radius: 4px;
-  font-size: 13px;
+  font-size: 18px;
 }
 .giving-options .selected {
   background: var(--green);
@@ -1083,7 +1083,7 @@ textarea:focus-visible {
   padding: 16px;
   background: #eff1e8;
   border-radius: 4px;
-  font-size: 11px;
+  font-size: 16px;
   margin-bottom: 20px;
 }
 .resource-filters {
@@ -1097,7 +1097,7 @@ textarea:focus-visible {
   border: 1px solid var(--line);
   border-radius: 30px;
   padding: 9px 18px;
-  font-size: 11px;
+  font-size: 16px;
 }
 .resource-filters button.active {
   background: var(--green);
@@ -1123,11 +1123,11 @@ textarea:focus-visible {
   margin-bottom: 40px;
 }
 .resource-article h2 {
-  font-size: 35px;
+  font-size: 38px;
   margin: 30px 0 15px;
 }
 .resource-article p {
-  font-size: 16px;
+  font-size: 18px;
   margin-bottom: 25px;
   line-height: 1.95;
 }
@@ -1137,7 +1137,7 @@ textarea:focus-visible {
   align-items: baseline;
 }
 .article-step > span {
-  font: 24px var(--serif);
+  font: 27px var(--serif);
   color: var(--orange);
 }
 .legal {
@@ -1145,12 +1145,12 @@ textarea:focus-visible {
   padding-block: 20px 80px;
 }
 .legal h2 {
-  font-size: 30px;
+  font-size: 33px;
   margin: 35px 0 15px;
 }
 .legal p,
 .legal li {
-  font-size: 14px;
+  font-size: 18px;
   color: var(--muted);
   margin-bottom: 16px;
 }
@@ -1165,11 +1165,11 @@ textarea:focus-visible {
   padding: 38px;
 }
 .involve-card h3 {
-  font-size: 32px;
+  font-size: 35px;
   margin-block: 20px 15px;
 }
 .involve-card p {
-  font-size: 14px;
+  font-size: 18px;
   margin-bottom: 25px;
 }
 .login-screen {
@@ -1202,7 +1202,7 @@ textarea:focus-visible {
 }
 .login-story p {
   color: #c5cebc;
-  font-size: 14px;
+  font-size: 18px;
   margin-top: 25px;
   max-width: 350px;
 }
@@ -1216,7 +1216,7 @@ textarea:focus-visible {
   color: #9eaf8520;
 }
 .login-story > span {
-  font-size: 10px;
+  font-size: 15px;
   color: #b1bea6;
 }
 .login-panel {
@@ -1234,18 +1234,18 @@ textarea:focus-visible {
   margin-bottom: 18px;
 }
 .login-box h2 {
-  font-size: 41px;
+  font-size: 44px;
   letter-spacing: -1.5px;
 }
 .login-box > p {
-  font-size: 13px;
+  font-size: 18px;
   margin-block: 17px 30px;
 }
 .login-box .button {
   width: 100%;
 }
 .login-help {
-  font-size: 11px;
+  font-size: 16px;
   text-align: center;
   margin-top: 25px;
   color: var(--muted);
@@ -1260,11 +1260,11 @@ textarea:focus-visible {
   text-align: center;
 }
 .login-demo p {
-  font-size: 11px;
+  font-size: 16px;
   margin-bottom: 12px;
 }
 .back-link {
-  font-size: 11px;
+  font-size: 16px;
   display: flex;
   gap: 8px;
   align-items: center;
@@ -1311,7 +1311,7 @@ textarea:focus-visible {
   display: flex;
   min-height: 100vh;
   background: #f6f7f3;
-  font-size: 13px;
+  font-size: 18px;
   color: #293b30;
 }
 .sidebar {
@@ -1330,17 +1330,17 @@ textarea:focus-visible {
   padding-left: 3px;
 }
 .sidebar .brand > span {
-  font-size: 17px;
+  font-size: 19px;
 }
 .sidebar .brand span span {
-  font-size: 16px;
+  font-size: 18px;
 }
 .sidebar .brand svg {
   width: 34px;
   height: 34px;
 }
 .workspace-label {
-  font-size: 8px;
+  font-size: 14px;
   letter-spacing: 1.8px;
   color: #83907b;
   padding: 24px 14px 17px;
@@ -1355,7 +1355,7 @@ textarea:focus-visible {
   align-items: center;
   gap: 12px;
   padding: 11px 14px;
-  font-size: 11px;
+  font-size: 16px;
   color: #75816e;
   border-radius: 5px;
 }
@@ -1386,7 +1386,7 @@ textarea:focus-visible {
   display: flex;
   gap: 10px;
   align-items: center;
-  font-size: 10px;
+  font-size: 15px;
   color: #69775f;
 }
 .sidebar-profile {
@@ -1402,17 +1402,17 @@ textarea:focus-visible {
   display: grid;
   place-items: center;
   background: #e5e9da;
-  font-size: 10px;
+  font-size: 15px;
   color: #667753;
   flex-shrink: 0;
 }
 .sidebar-profile strong {
-  font-size: 10px;
+  font-size: 15px;
   display: block;
   font-weight: 500;
 }
 .sidebar-profile small {
-  font-size: 8px;
+  font-size: 14px;
   color: #8b9484;
   text-transform: capitalize;
 }
@@ -1442,7 +1442,7 @@ textarea:focus-visible {
   gap: 20px;
 }
 .crumb {
-  font-size: 10px;
+  font-size: 15px;
   display: flex;
   gap: 15px;
   align-items: center;
@@ -1463,7 +1463,7 @@ textarea:focus-visible {
   align-items: center;
   gap: 8px;
   color: #8d9784;
-  font-size: 10px;
+  font-size: 15px;
 }
 .topbar-search kbd {
   font-family: inherit;
@@ -1473,7 +1473,7 @@ textarea:focus-visible {
   margin-left: 25px;
 }
 .workspace-date {
-  font-size: 10px;
+  font-size: 15px;
   color: #7b8772;
 }
 .topbar-icon {
@@ -1493,7 +1493,7 @@ textarea:focus-visible {
   gap: 20px;
   background: #eee8d5;
   padding: 9px 36px;
-  font-size: 10px;
+  font-size: 15px;
   color: #7b6d41;
 }
 .demo-banner > span {
@@ -1506,7 +1506,7 @@ textarea:focus-visible {
   border: 1px solid #d3c9ac;
   border-radius: 4px;
   padding: 3px 7px;
-  font-size: 10px;
+  font-size: 15px;
   color: #6f653f;
 }
 .demo-banner > div {
@@ -1525,16 +1525,16 @@ textarea:focus-visible {
   margin-bottom: 27px;
 }
 .dashboard-heading h1 {
-  font: 32px/1.25 var(--serif);
+  font: 35px/1.25 var(--serif);
   letter-spacing: -0.8px;
 }
 .dashboard-heading p {
-  font-size: 11px;
+  font-size: 16px;
   margin-top: 8px;
   color: #89917f;
 }
 .dashboard-heading .button {
-  font-size: 10px;
+  font-size: 15px;
   padding: 10px 15px;
   gap: 12px;
 }
@@ -1562,7 +1562,7 @@ textarea:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 10px;
+  font-size: 15px;
   color: #78876c;
 }
 .metric-top > span:last-child {
@@ -1576,13 +1576,13 @@ textarea:focus-visible {
 }
 .metric-value {
   font-family: var(--serif);
-  font-size: 36px;
+  font-size: 39px;
   line-height: 1.3;
   margin-block: 10px 5px;
   letter-spacing: -1px;
 }
 .metric-bottom {
-  font-size: 9px;
+  font-size: 15px;
   color: #8e9786;
   display: flex;
   gap: 6px;
@@ -1612,17 +1612,17 @@ textarea:focus-visible {
   padding: 21px 23px 17px;
 }
 .panel-head h2 {
-  font: 17px/1.3 var(--serif);
+  font: 19px/1.3 var(--serif);
   letter-spacing: -0.2px;
 }
 .panel-head p {
-  font-size: 9px;
+  font-size: 15px;
   color: #909a86;
   margin-top: 5px;
 }
 .panel-head a,
 .panel-head button {
-  font-size: 9px;
+  font-size: 15px;
   color: #7c896c;
   display: flex;
   gap: 7px;
@@ -1633,7 +1633,7 @@ textarea:focus-visible {
 .chart-legend {
   display: flex;
   gap: 17px;
-  font-size: 8px;
+  font-size: 14px;
   color: #88947d;
   padding: 0 23px;
 }
@@ -1658,7 +1658,7 @@ textarea:focus-visible {
   padding: 18px 23px 20px;
 }
 .chart-axis {
-  font-size: 8px;
+  font-size: 14px;
   color: #a1aa96;
   display: flex;
   flex-direction: column;
@@ -1687,7 +1687,7 @@ textarea:focus-visible {
   justify-content: flex-end;
   align-items: center;
   gap: 8px;
-  font-size: 8px;
+  font-size: 14px;
   color: #99a48e;
 }
 .bar-pair {
@@ -1720,7 +1720,7 @@ textarea:focus-visible {
   display: grid;
   place-content: center;
   text-align: center;
-  font-size: 11px;
+  font-size: 16px;
   color: #909c83;
 }
 .tasks-list {
@@ -1749,22 +1749,22 @@ textarea:focus-visible {
 }
 .task-item strong {
   display: block;
-  font-size: 10px;
+  font-size: 15px;
   font-weight: 500;
 }
 .task-item p {
-  font-size: 9px;
+  font-size: 15px;
   color: #9aa38e;
   margin-top: 4px;
 }
 .task-item .badge {
   margin-left: auto;
   white-space: nowrap;
-  font-size: 7px;
+  font-size: 14px;
   padding: 2px 6px;
 }
 .badge {
-  font-size: 8px;
+  font-size: 14px;
   border-radius: 20px;
   display: inline-flex;
   align-items: center;
@@ -1804,7 +1804,7 @@ textarea:focus-visible {
 }
 .data-table th {
   background: #f7f8f2;
-  font-size: 8px;
+  font-size: 14px;
   letter-spacing: 0.5px;
   font-weight: 500;
   color: #8c977f;
@@ -1815,7 +1815,7 @@ textarea:focus-visible {
 .data-table td {
   padding: 15px 22px;
   border-bottom: 1px solid #edf0e6;
-  font-size: 10px;
+  font-size: 15px;
   color: #7e8a71;
   vertical-align: middle;
 }
@@ -1831,7 +1831,7 @@ textarea:focus-visible {
 .table-person .avatar {
   width: 29px;
   height: 29px;
-  font-size: 9px;
+  font-size: 15px;
   background: #eee9d9;
   color: #8e805e;
 }
@@ -1839,16 +1839,16 @@ textarea:focus-visible {
   display: block;
   color: #46593c;
   font-weight: 500;
-  font-size: 10px;
+  font-size: 15px;
 }
 .table-person small {
   display: block;
-  font-size: 8px;
+  font-size: 14px;
   color: #9ba58f;
   margin-top: 3px;
 }
 .table-category {
-  font-size: 9px;
+  font-size: 15px;
 }
 .mini-activity {
   padding: 0 23px 16px;
@@ -1868,12 +1868,12 @@ textarea:focus-visible {
   color: #8a9b72;
 }
 .mini-activity-item p {
-  font-size: 10px;
+  font-size: 15px;
   color: #728165;
   line-height: 1.7;
 }
 .mini-activity-item small {
-  font-size: 8px;
+  font-size: 14px;
   color: #a2ac97;
 }
 .foundation-note {
@@ -1885,16 +1885,16 @@ textarea:focus-visible {
   overflow: hidden;
 }
 .foundation-note > span {
-  font-size: 8px;
+  font-size: 14px;
   letter-spacing: 1.5px;
   color: #86986d;
 }
 .foundation-note h3 {
-  font-size: 23px;
+  font-size: 26px;
   margin-block: 11px;
 }
 .foundation-note p {
-  font-size: 10px;
+  font-size: 15px;
   line-height: 1.8;
   color: #889876;
   max-width: 220px;
@@ -1908,7 +1908,7 @@ textarea:focus-visible {
   color: #b9c89b44;
 }
 .foundation-note a {
-  font-size: 9px;
+  font-size: 15px;
   display: flex;
   align-items: center;
   gap: 20px;
@@ -1917,7 +1917,7 @@ textarea:focus-visible {
   z-index: 1;
 }
 .workspace-footnote {
-  font-size: 9px;
+  font-size: 15px;
   color: #a0aa93;
   margin-top: 5px;
   display: flex;
@@ -1934,7 +1934,7 @@ textarea:focus-visible {
 }
 .table-toolbar .search-input {
   max-width: 300px;
-  font-size: 11px;
+  font-size: 16px;
   padding: 9px 12px;
   min-height: 38px;
 }
@@ -1943,11 +1943,11 @@ textarea:focus-visible {
   border: 1px solid var(--line);
   border-radius: 4px;
   background: #fffefa;
-  font-size: 10px;
+  font-size: 15px;
   color: #7e8a71;
 }
 .table-count {
-  font-size: 9px;
+  font-size: 15px;
   color: #98a28b;
   padding: 15px 22px;
   border-top: 1px solid #edf0e6;
@@ -1955,7 +1955,7 @@ textarea:focus-visible {
 .status-select {
   border: 1px solid #e1e7d6;
   border-radius: 4px;
-  font-size: 9px;
+  font-size: 15px;
   background: #fffefa;
   color: #758363;
   padding: 4px;
@@ -1970,17 +1970,17 @@ textarea:focus-visible {
   margin: auto auto 15px;
 }
 .empty-state h3 {
-  font-size: 26px;
+  font-size: 29px;
   margin-bottom: 12px;
 }
 .empty-state p {
-  font-size: 12px;
+  font-size: 16px;
   max-width: 380px;
   margin: auto;
 }
 .empty-state .button {
   margin-top: 24px;
-  font-size: 11px;
+  font-size: 16px;
 }
 .modal-backdrop {
   position: fixed;
@@ -2010,22 +2010,22 @@ textarea:focus-visible {
   margin-bottom: 25px;
 }
 .modal h2 {
-  font-size: 29px;
+  font-size: 32px;
   letter-spacing: -0.7px;
 }
 .modal .field {
-  font-size: 11px;
+  font-size: 16px;
   margin-bottom: 16px;
 }
 .modal .field input,
 .modal .field select {
-  font-size: 12px;
+  font-size: 16px;
   min-height: 40px;
   padding: 9px 12px;
 }
 .modal .button {
   width: 100%;
-  font-size: 12px;
+  font-size: 16px;
 }
 .detail-grid {
   display: grid;
@@ -2037,19 +2037,19 @@ textarea:focus-visible {
 }
 .detail-field label {
   display: block;
-  font-size: 10px;
+  font-size: 15px;
   color: #8e9982;
   margin-bottom: 5px;
 }
 .detail-field p {
-  font-size: 13px;
+  font-size: 18px;
   color: #43573c;
 }
 .detail-notes {
   background: #edf0e5;
   padding: 17px;
   border-radius: 5px;
-  font-size: 12px;
+  font-size: 16px;
   margin-block: 10px 20px;
   white-space: pre-wrap;
 }
@@ -2065,7 +2065,7 @@ textarea:focus-visible {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 10px;
+  font-size: 15px;
   margin-top: 18px;
 }
 .report-row > span:first-child {
@@ -2101,18 +2101,18 @@ textarea:focus-visible {
 }
 .account-row strong {
   display: block;
-  font-size: 11px;
+  font-size: 16px;
   font-weight: 500;
 }
 .account-row small {
-  font-size: 10px;
+  font-size: 15px;
   color: #8b9880;
 }
 .account-row > span {
   margin-left: auto;
 }
 .account-row button {
-  font-size: 9px;
+  font-size: 15px;
   color: #b27c5e;
   border: 0;
   background: none;
@@ -2129,19 +2129,19 @@ textarea:focus-visible {
   border-radius: 4px;
 }
 .permission-grid h3 {
-  font: 20px var(--serif);
+  font: 22px var(--serif);
   text-transform: capitalize;
   margin-bottom: 8px;
 }
 .permission-grid p {
-  font-size: 10px;
+  font-size: 15px;
 }
 .invitation-box {
   padding: 20px;
   background: #edf1e4;
   margin-top: 20px;
   word-break: break-all;
-  font-size: 12px;
+  font-size: 16px;
 }
 .invitation-box p {
   margin-bottom: 10px;
@@ -2158,7 +2158,7 @@ textarea:focus-visible {
   background: var(--green);
   color: var(--cream);
   border-radius: 5px;
-  font-size: 12px;
+  font-size: 16px;
   box-shadow: 0 10px 30px #203a2b33;
   z-index: 110;
 }
@@ -2166,7 +2166,7 @@ textarea:focus-visible {
   display: none;
 }
 .workspace-error {
-  font-size: 12px;
+  font-size: 16px;
   padding: 16px 20px;
   background: #faeee2;
   border: 1px solid #eadbc7;
@@ -2180,7 +2180,7 @@ textarea:focus-visible {
   align-items: center;
 }
 .workspace-title-status > span {
-  font-size: 8px;
+  font-size: 14px;
   border: 1px solid #d7dfc9;
   border-radius: 20px;
   padding: 3px 8px;
@@ -2197,7 +2197,7 @@ textarea:focus-visible {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 10px;
+  font-size: 15px;
   color: #819170;
 }
 .dashboard-locked {
@@ -2208,17 +2208,17 @@ textarea:focus-visible {
   border-radius: 6px;
 }
 .dashboard-locked h2 {
-  font-size: 34px;
+  font-size: 37px;
 }
 .dashboard-locked p {
-  font-size: 13px;
+  font-size: 18px;
   margin-top: 15px;
 }
 .dashboard-locked a {
   margin-top: 25px;
 }
 .demo-reset {
-  font-size: 9px;
+  font-size: 15px;
   border: 0;
   background: none;
   text-decoration: underline;
@@ -2277,7 +2277,7 @@ textarea:focus-visible {
     flex-wrap: wrap;
   }
   .hero-secondary {
-    font-size: 10px;
+    font-size: 15px;
   }
   .floating-note {
     left: -24px;
@@ -2294,7 +2294,7 @@ textarea:focus-visible {
     padding: 60px 10%;
   }
   .community-copy h2 {
-    font-size: 41px;
+    font-size: 44px;
   }
   .dashboard-grid {
     grid-template-columns: minmax(0, 1.7fr) minmax(230px, 1fr);
@@ -2321,18 +2321,18 @@ textarea:focus-visible {
     height: 85px;
   }
   .main-nav {
-    font-size: 11px;
+    font-size: 16px;
     gap: 17px;
   }
   .brand > span {
-    font-size: 18px;
+    font-size: 20px;
   }
   .brand span span {
-    font-size: 16px;
+    font-size: 18px;
   }
   .nav-donate {
     padding: 10px 12px;
-    font-size: 10px;
+    font-size: 15px;
   }
   .hero {
     gap: 27px;
@@ -2341,14 +2341,14 @@ textarea:focus-visible {
     font-size: 53px;
   }
   .hero-copy > p {
-    font-size: 13px;
+    font-size: 18px;
   }
   .hero-art,
   .hero-photo {
     min-height: 440px;
   }
   .hero .eyebrow {
-    font-size: 7px;
+    font-size: 14px;
     letter-spacing: 1.2px;
   }
   .hero-flower {
@@ -2358,17 +2358,17 @@ textarea:focus-visible {
   }
   .floating-note {
     left: -15px;
-    font-size: 9px;
+    font-size: 15px;
     padding: 12px;
   }
   .hero-assurance {
     margin-top: 27px;
   }
   .principle-strip span:first-child {
-    font-size: 15px;
+    font-size: 18px;
   }
   .principle-strip > .shell {
-    font-size: 9px;
+    font-size: 15px;
     gap: 12px;
   }
   .section {
@@ -2378,29 +2378,29 @@ textarea:focus-visible {
     gap: 50px;
   }
   .intro-grid .large-copy {
-    font-size: 22px;
+    font-size: 25px;
   }
   .service-card {
     padding: 25px 22px;
   }
   .service-card h3 {
-    font-size: 22px;
+    font-size: 25px;
   }
   .journey-heading h2 {
-    font-size: 42px;
+    font-size: 45px;
   }
   .journey-section {
     gap: 45px;
   }
   .community-copy h2 {
-    font-size: 36px;
+    font-size: 39px;
   }
   .resource-cover {
     height: 215px;
     padding: 20px;
   }
   .resource-info h3 {
-    font-size: 23px;
+    font-size: 26px;
   }
   .donation-banner {
     padding: 45px;
@@ -2436,13 +2436,13 @@ textarea:focus-visible {
     gap: 10px;
   }
   .metric-value {
-    font-size: 30px;
+    font-size: 33px;
   }
   .metric-top {
-    font-size: 8px;
+    font-size: 14px;
   }
   .metric-bottom {
-    font-size: 8px;
+    font-size: 14px;
   }
   .dashboard-grid {
     grid-template-columns: 1fr;
@@ -2454,7 +2454,7 @@ textarea:focus-visible {
     align-items: start;
   }
   .dashboard-heading h1 {
-    font-size: 28px;
+    font-size: 31px;
   }
   .report-grid {
     grid-template-columns: 1fr;
@@ -2475,22 +2475,22 @@ textarea:focus-visible {
     width: calc(100% - 40px);
   }
   .announcement {
-    font-size: 8px;
+    font-size: 14px;
     height: 30px;
     gap: 12px;
   }
   .announcement a {
-    font-size: 8px;
+    font-size: 14px;
   }
   .nav-inner {
     height: 78px;
     gap: 15px;
   }
   .brand > span {
-    font-size: 17px;
+    font-size: 19px;
   }
   .brand span span {
-    font-size: 15px;
+    font-size: 18px;
   }
   .brand > svg {
     width: 34px;
@@ -2505,7 +2505,7 @@ textarea:focus-visible {
     background: var(--cream);
     padding: 20px 25px 30px;
     border-bottom: 1px solid var(--line);
-    font-size: 14px;
+    font-size: 18px;
     box-shadow: 0 15px 20px #203a2b08;
   }
   .main-nav.open {
@@ -2519,7 +2519,7 @@ textarea:focus-visible {
   .nav-donate {
     margin-left: auto;
     padding: 10px 12px;
-    font-size: 9px;
+    font-size: 15px;
     gap: 10px;
   }
   .menu-button {
@@ -2540,12 +2540,12 @@ textarea:focus-visible {
     letter-spacing: -3px;
   }
   .hero .eyebrow {
-    font-size: 8px;
+    font-size: 14px;
     letter-spacing: 1.1px;
     margin-bottom: 22px;
   }
   .hero-copy > p {
-    font-size: 14px;
+    font-size: 18px;
     max-width: 450px;
   }
   .hero-actions {
@@ -2553,11 +2553,11 @@ textarea:focus-visible {
     margin-top: 25px;
   }
   .hero .button {
-    font-size: 12px;
+    font-size: 16px;
     padding: 15px 20px;
   }
   .hero-secondary {
-    font-size: 11px;
+    font-size: 16px;
   }
   .hero-assurance {
     margin-top: 25px;
@@ -2580,7 +2580,7 @@ textarea:focus-visible {
     left: 0;
     bottom: 50px;
     padding: 16px;
-    font-size: 11px;
+    font-size: 16px;
   }
   .floating-note > svg {
     display: block;
@@ -2596,11 +2596,11 @@ textarea:focus-visible {
     justify-content: flex-start;
     gap: 12px 20px;
     padding-block: 20px;
-    font-size: 9px;
+    font-size: 15px;
   }
   .principle-strip span:first-child {
     flex-basis: 100%;
-    font-size: 19px;
+    font-size: 21px;
     margin-bottom: 3px;
   }
   .principle-strip span {
@@ -2616,11 +2616,11 @@ textarea:focus-visible {
     margin-bottom: 30px;
   }
   .section-number {
-    font-size: 7px;
+    font-size: 14px;
     letter-spacing: 1px;
   }
   .eyebrow {
-    font-size: 8px;
+    font-size: 14px;
     letter-spacing: 1.5px;
   }
   .intro-grid {
@@ -2631,17 +2631,17 @@ textarea:focus-visible {
     font-size: 46px;
   }
   .intro-grid .large-copy {
-    font-size: 24px;
+    font-size: 27px;
   }
   .intro-grid p:not(.large-copy) {
-    font-size: 14px;
+    font-size: 18px;
   }
   .section-heading {
     display: block;
     margin-bottom: 30px;
   }
   .section-heading h2 {
-    font-size: 42px;
+    font-size: 45px;
   }
   .section-heading > .text-link {
     margin-top: 23px;
@@ -2654,24 +2654,24 @@ textarea:focus-visible {
     padding: 27px;
   }
   .service-card h3 {
-    font-size: 29px;
+    font-size: 32px;
     max-width: 300px;
   }
   .service-card p {
-    font-size: 13px;
+    font-size: 18px;
     max-width: none;
   }
   .service-icon {
     margin-bottom: 25px;
   }
   .service-index {
-    font-size: 13px;
+    font-size: 18px;
   }
   .service-arrow {
     margin-top: 13px;
   }
   .service-other {
-    font-size: 10px;
+    font-size: 15px;
     align-items: flex-start;
     text-align: center;
     gap: 12px;
@@ -2686,14 +2686,14 @@ textarea:focus-visible {
   }
   .journey-heading p {
     max-width: none;
-    font-size: 14px;
+    font-size: 18px;
   }
   .journey-step p {
-    font-size: 13px;
+    font-size: 18px;
     max-width: none;
   }
   .journey-step h3 {
-    font-size: 27px;
+    font-size: 30px;
   }
   .journey-step {
     padding-bottom: 32px;
@@ -2712,10 +2712,10 @@ textarea:focus-visible {
     padding: 45px 25px;
   }
   .community-copy h2 {
-    font-size: 43px;
+    font-size: 46px;
   }
   .community-copy p {
-    font-size: 14px;
+    font-size: 18px;
     max-width: none;
   }
   .community-caption {
@@ -2730,23 +2730,23 @@ textarea:focus-visible {
     padding: 25px;
   }
   .cover-label {
-    font-size: 8px;
+    font-size: 14px;
   }
   .cover-bottom {
-    font-size: 9px;
+    font-size: 15px;
   }
   .resource-info h3 {
-    font-size: 29px;
+    font-size: 32px;
     max-width: 350px;
   }
   .resource-info p {
-    font-size: 13px;
+    font-size: 18px;
   }
   .resource-info .eyebrow {
-    font-size: 9px;
+    font-size: 15px;
   }
   .resource-info .text-link {
-    font-size: 11px;
+    font-size: 16px;
   }
   .donation-banner {
     padding: 37px 27px;
@@ -2754,10 +2754,10 @@ textarea:focus-visible {
     margin-bottom: 65px;
   }
   .donation-banner h2 {
-    font-size: 43px;
+    font-size: 46px;
   }
   .donation-banner p {
-    font-size: 13px;
+    font-size: 18px;
   }
   .donation-banner > .button {
     margin-top: 25px;
@@ -2778,24 +2778,24 @@ textarea:focus-visible {
     grid-column: span 2;
   }
   .footer-top > div:not(:first-child) > a {
-    font-size: 12px;
+    font-size: 16px;
   }
   .footer-top .eyebrow {
     margin-bottom: 15px;
   }
   .footer-top > div > p {
-    font-size: 13px;
+    font-size: 18px;
   }
   .footer-bottom {
     display: block;
-    font-size: 9px;
+    font-size: 15px;
   }
   .footer-bottom > div {
     margin-top: 13px;
     gap: 20px;
   }
   .footer-note {
-    font-size: 8px;
+    font-size: 14px;
     line-height: 1.8;
   }
   .page-hero {
@@ -2805,7 +2805,7 @@ textarea:focus-visible {
     font-size: 49px;
   }
   .page-hero > p {
-    font-size: 14px;
+    font-size: 18px;
   }
   .page-content {
     padding-bottom: 60px;
@@ -2831,16 +2831,16 @@ textarea:focus-visible {
     width: 26px;
   }
   .service-detail h3 {
-    font-size: 27px;
+    font-size: 30px;
   }
   .service-detail p {
-    font-size: 13px;
+    font-size: 18px;
   }
   .faq {
     margin-top: 50px;
   }
   .faq h2 {
-    font-size: 38px;
+    font-size: 41px;
   }
   .form-layout {
     grid-template-columns: 1fr;
@@ -2860,16 +2860,16 @@ textarea:focus-visible {
     padding: 25px;
   }
   .form-card > p {
-    font-size: 13px;
+    font-size: 18px;
   }
   .check-field {
-    font-size: 11px;
+    font-size: 16px;
   }
   .field {
-    font-size: 13px;
+    font-size: 18px;
   }
   .form-card .button {
-    font-size: 13px;
+    font-size: 18px;
   }
   .resource-search {
     display: block;
@@ -2882,13 +2882,13 @@ textarea:focus-visible {
     width: calc(100% - 40px);
   }
   .resource-article p {
-    font-size: 15px;
+    font-size: 18px;
   }
   .resource-filters {
     gap: 7px;
   }
   .resource-filters button {
-    font-size: 10px;
+    font-size: 15px;
     padding: 8px 13px;
   }
   .involve-options {
@@ -2909,10 +2909,10 @@ textarea:focus-visible {
     margin-bottom: 35px;
   }
   .login-story h1 {
-    font-size: 40px;
+    font-size: 43px;
   }
   .login-story p {
-    font-size: 12px;
+    font-size: 16px;
     margin-top: 15px;
   }
   .login-story > span {
@@ -2930,7 +2930,7 @@ textarea:focus-visible {
     margin-bottom: 25px;
   }
   .login-box h2 {
-    font-size: 37px;
+    font-size: 40px;
   }
   .sidebar {
     transform: translateX(-100%);
@@ -2970,7 +2970,7 @@ textarea:focus-visible {
   }
   .demo-banner {
     padding: 8px 17px;
-    font-size: 8px;
+    font-size: 14px;
     gap: 10px;
     align-items: flex-start;
   }
@@ -2984,7 +2984,7 @@ textarea:focus-visible {
     justify-content: flex-end;
   }
   .demo-banner select {
-    font-size: 8px;
+    font-size: 14px;
     max-width: 100px;
   }
   .demo-reset {
@@ -2996,14 +2996,14 @@ textarea:focus-visible {
     margin-bottom: 23px;
   }
   .dashboard-heading h1 {
-    font-size: 27px;
+    font-size: 30px;
   }
   .dashboard-heading p {
-    font-size: 10px;
+    font-size: 15px;
     max-width: 210px;
   }
   .dashboard-heading .button {
-    font-size: 9px;
+    font-size: 15px;
     padding: 9px 11px;
     gap: 6px;
   }
@@ -3022,13 +3022,13 @@ textarea:focus-visible {
     padding: 15px;
   }
   .metric-value {
-    font-size: 34px;
+    font-size: 37px;
   }
   .metric-top {
-    font-size: 9px;
+    font-size: 15px;
   }
   .metric-bottom {
-    font-size: 8px;
+    font-size: 14px;
   }
   .dashboard-grid {
     gap: 0;
@@ -3040,10 +3040,10 @@ textarea:focus-visible {
     padding: 18px;
   }
   .panel-head h2 {
-    font-size: 18px;
+    font-size: 20px;
   }
   .panel-head p {
-    font-size: 9px;
+    font-size: 15px;
   }
   .activity-chart {
     height: 200px;
@@ -3054,12 +3054,12 @@ textarea:focus-visible {
     gap: 8px;
   }
   .data-table th {
-    font-size: 8px;
+    font-size: 14px;
     padding: 12px 15px;
   }
   .data-table td {
     padding: 14px 15px;
-    font-size: 10px;
+    font-size: 15px;
   }
   .dashboard-right {
     display: block;
@@ -3069,20 +3069,20 @@ textarea:focus-visible {
     padding-inline: 18px;
   }
   .task-item strong {
-    font-size: 11px;
+    font-size: 16px;
   }
   .task-item p {
-    font-size: 9px;
+    font-size: 15px;
   }
   .foundation-note {
     padding: 24px;
   }
   .foundation-note p {
     max-width: 300px;
-    font-size: 11px;
+    font-size: 16px;
   }
   .workspace-footnote {
-    font-size: 8px;
+    font-size: 14px;
   }
   .table-toolbar {
     padding: 15px;
@@ -3090,17 +3090,17 @@ textarea:focus-visible {
   }
   .table-toolbar .search-input {
     max-width: 62%;
-    font-size: 11px;
+    font-size: 16px;
   }
   .table-toolbar select {
     max-width: 110px;
-    font-size: 9px;
+    font-size: 15px;
   }
   .table-person strong {
-    font-size: 11px;
+    font-size: 16px;
   }
   .table-person small {
-    font-size: 9px;
+    font-size: 15px;
   }
   .modal {
     padding: 25px;
@@ -3128,13 +3128,13 @@ textarea:focus-visible {
     padding: 50px 20px;
   }
   .dashboard-locked h2 {
-    font-size: 30px;
+    font-size: 33px;
   }
   .workspace-title-status > span {
     display: none;
   }
   .workspace-error {
-    font-size: 11px;
+    font-size: 16px;
   }
   .chart-legend {
     padding-inline: 18px;
@@ -3151,24 +3151,24 @@ textarea:focus-visible {
     gap: 16px;
   }
   .nav-donate {
-    font-size: 8px;
+    font-size: 14px;
     padding: 9px;
   }
   .brand {
     gap: 5px;
   }
   .brand > span {
-    font-size: 15px;
+    font-size: 18px;
   }
   .brand span span {
-    font-size: 14px;
+    font-size: 18px;
   }
   .announcement {
-    font-size: 7px;
+    font-size: 14px;
     gap: 7px;
   }
   .announcement a {
-    font-size: 7px;
+    font-size: 14px;
   }
   .hero-photo,
   .hero-art {
@@ -3176,25 +3176,25 @@ textarea:focus-visible {
     min-height: 370px;
   }
   .hero-secondary {
-    font-size: 10px;
+    font-size: 15px;
   }
   .section-heading h2 {
-    font-size: 38px;
+    font-size: 41px;
   }
   .principle-strip > .shell {
     gap: 12px;
   }
   .principle-strip span {
-    font-size: 8px;
+    font-size: 14px;
   }
   .community-copy h2 {
-    font-size: 38px;
+    font-size: 41px;
   }
   .metric-top {
-    font-size: 8px;
+    font-size: 14px;
   }
   .metric-bottom {
-    font-size: 7px;
+    font-size: 14px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -3258,9 +3258,319 @@ textarea:focus-visible {
   }
   .panel-head > span {
     flex-shrink: 0;
-    font-size: 8px !important;
+    font-size: 14px !important;
   }
 }
 .table-wrap {
   position: relative;
+}
+
+/* Larger, more approachable type and uncropped community portraits. */
+.involvement-photo img {
+  object-position: center 15%;
+}
+.inline-privacy-link {
+  display: inline;
+  border: 0;
+  padding: 0;
+  background: none;
+  font: inherit;
+  color: var(--green);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.privacy-dialog {
+  max-width: 760px;
+}
+.privacy-dialog .modal-head {
+  position: sticky;
+  top: -30px;
+  background: var(--cream);
+  padding-block: 12px;
+  z-index: 1;
+  border-bottom: 1px solid var(--line);
+}
+.privacy-dialog .modal-head h2 {
+  font-size: 32px;
+}
+.privacy-dialog .privacy-copy h2 {
+  font-size: 27px;
+  letter-spacing: -0.7px;
+  margin: 26px 0 12px;
+}
+.privacy-dialog .privacy-copy p {
+  font-size: 18px;
+  line-height: 1.85;
+  margin-bottom: 16px;
+}
+.privacy-dialog .privacy-return {
+  position: sticky;
+  bottom: -30px;
+  background: var(--cream);
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+  padding-bottom: 6px;
+  margin-top: 25px;
+}
+.privacy-dialog .privacy-return .button {
+  width: 100%;
+  font-size: 18px;
+}
+.privacy-page-return {
+  margin-bottom: 25px;
+}
+@media (max-width: 720px) {
+  .announcement {
+    height: auto;
+    min-height: 36px;
+    padding: 7px 14px;
+    flex-wrap: wrap;
+    gap: 3px 12px;
+    font-size: 14px;
+  }
+  .announcement a {
+    font-size: 14px;
+  }
+  .nav-inner {
+    gap: 12px;
+  }
+  .nav-inner .brand > span {
+    font-size: 18px;
+  }
+  .nav-inner .brand span span {
+    font-size: 16px;
+  }
+  .nav-donate {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+  .nav-donate svg {
+    display: none;
+  }
+  .hero-actions {
+    gap: 18px;
+  }
+  .hero .button {
+    font-size: 16px;
+  }
+  .hero-secondary {
+    font-size: 16px;
+  }
+  .involvement-photo {
+    height: 360px;
+  }
+  .involvement-photo img {
+    object-position: 50% 15%;
+  }
+  .privacy-dialog {
+    padding: 22px;
+  }
+  .privacy-dialog .modal-head {
+    top: -22px;
+  }
+  .privacy-dialog .privacy-return {
+    bottom: -22px;
+  }
+  .privacy-dialog .privacy-copy p {
+    font-size: 18px;
+  }
+  .privacy-dialog .privacy-copy h2 {
+    font-size: 25px;
+  }
+  .privacy-dialog .modal-head h2 {
+    font-size: 29px;
+  }
+  .footer-bottom > div {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 380px) {
+  .nav-inner {
+    gap: 9px;
+  }
+  .nav-inner .brand > span {
+    font-size: 18px;
+  }
+  .nav-inner .brand span span {
+    font-size: 16px;
+  }
+  .nav-donate {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+.donate-mobile-label {
+  display: none;
+}
+.privacy-dialog {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  max-height: 90vh;
+}
+.privacy-dialog .modal-head {
+  position: static;
+  flex-shrink: 0;
+  padding-top: 0;
+  margin-bottom: 16px;
+}
+.privacy-dialog .privacy-copy {
+  overflow-y: auto;
+  min-height: 0;
+  padding-right: 12px;
+}
+.privacy-dialog .privacy-return {
+  position: static;
+  flex-shrink: 0;
+  margin-top: 16px;
+}
+.sidebar {
+  width: 252px;
+}
+.workspace-main {
+  margin-left: 252px;
+  width: calc(100% - 252px);
+}
+.data-table td {
+  font-size: 15px;
+}
+.table-person strong {
+  font-size: 15px;
+}
+.table-person small {
+  font-size: 14px;
+}
+.table-category {
+  font-size: 14px;
+}
+.metric-top {
+  font-size: 15px;
+}
+.metric-bottom {
+  font-size: 14px;
+}
+.dashboard-heading h1 {
+  font-size: 38px;
+}
+.panel-head h2 {
+  font-size: 24px;
+}
+.sidebar nav a {
+  font-size: 16px;
+}
+@media (min-width: 721px) and (max-width: 1050px) {
+  .nav-inner {
+    height: 85px;
+  }
+  .main-nav {
+    display: none;
+    position: absolute;
+    top: 85px;
+    left: 0;
+    right: 0;
+    background: var(--cream);
+    padding: 25px 35px;
+    border-bottom: 1px solid var(--line);
+  }
+  .main-nav.open {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .main-nav a {
+    font-size: 18px;
+  }
+  .main-nav .mobile-only {
+    display: block;
+  }
+  .menu-button {
+    display: block;
+    border: 0;
+    background: none;
+  }
+  .nav-donate {
+    margin-left: auto;
+  }
+}
+@media (max-width: 720px) {
+  .workspace-main {
+    margin-left: 0;
+    width: 100%;
+  }
+  .sidebar {
+    width: 260px;
+  }
+  .nav-inner .brand > span {
+    font-size: 19px;
+  }
+  .nav-inner .brand span span {
+    font-size: 17px;
+  }
+  .nav-donate {
+    font-size: 16px;
+    padding: 10px 17px;
+    gap: 0;
+  }
+  .donate-desktop-label {
+    display: none;
+  }
+  .donate-mobile-label {
+    display: inline;
+  }
+  .dashboard-heading h1 {
+    font-size: 31px;
+  }
+  .dashboard-heading .button {
+    font-size: 14px;
+    padding: 11px 12px;
+  }
+  .dashboard-heading {
+    flex-wrap: wrap;
+  }
+  .dashboard-heading p {
+    max-width: none;
+  }
+  .metric-grid {
+    gap: 12px;
+  }
+  .metric-card {
+    padding: 16px;
+  }
+  .metric-top {
+    font-size: 14px;
+    gap: 8px;
+  }
+  .metric-bottom {
+    font-size: 13px;
+  }
+  .panel-head {
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .panel-head h2 {
+    font-size: 23px;
+  }
+  .panel-head > span {
+    font-size: 13px !important;
+  }
+  .task-item strong {
+    font-size: 15px;
+  }
+  .task-item p {
+    font-size: 14px;
+  }
+  .badge {
+    font-size: 13px;
+  }
+  .topbar-right {
+    gap: 8px;
+  }
+  .workspace-topbar {
+    padding-inline: 17px;
+  }
+}
+.wide-photo img {
+  object-position: center 15%;
 }

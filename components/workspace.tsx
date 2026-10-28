@@ -938,7 +938,7 @@ export function Workspace({
                           className="metric-value"
                           style={
                             m.value === "Volunteer"
-                              ? { fontSize: 25 }
+                              ? { fontSize: 28 }
                               : undefined
                           }
                         >
@@ -975,7 +975,7 @@ export function Workspace({
                                 : "New records over the past six months"}
                             </p>
                           </div>
-                          <span style={{ fontSize: 9, color: "#8d987e" }}>
+                          <span style={{ fontSize: 15, color: "#8d987e" }}>
                             Last 6 months{" "}
                             <ChevronDown
                               size={11}
@@ -1141,7 +1141,7 @@ export function Workspace({
                             {!Object.values(visibleData).some(
                               (rows) => rows.length,
                             ) && (
-                              <p style={{ fontSize: 11, paddingBottom: 15 }}>
+                              <p style={{ fontSize: 16, paddingBottom: 15 }}>
                                 A fresh start. Your team’s activity will appear
                                 here.
                               </p>
@@ -1211,7 +1211,7 @@ export function Workspace({
                           <m.icon size={16} />
                         </div>
                         <div className="metric-value">{m.value}</div>
-                        <p style={{ fontSize: 10 }}>{m.note}</p>
+                        <p style={{ fontSize: 15 }}>{m.note}</p>
                       </div>
                     ))}
                   </div>
@@ -1287,7 +1287,7 @@ export function Workspace({
                             <small>@{account.username}</small>
                           </div>
                           <span className="badge">{account.role}</span>
-                          <small style={{ color: "#8a977d", fontSize: 9 }}>
+                          <small style={{ color: "#8a977d", fontSize: 15 }}>
                             {!account.active
                               ? "Deactivated"
                               : account.activated
@@ -1315,7 +1315,7 @@ export function Workspace({
                     </div>
                     <p
                       style={{
-                        fontSize: 10,
+                        fontSize: 15,
                         padding: "15px 23px 20px",
                         color: "#8d9980",
                       }}
@@ -1765,7 +1765,7 @@ function ActivityChart({ rows }: { rows: RecordRow[] }) {
     return (
       <div className="chart-empty">
         <p>No activity yet.</p>
-        <p style={{ fontSize: 10, marginTop: 6 }}>
+        <p style={{ fontSize: 15, marginTop: 6 }}>
           Your monthly activity will grow here.
         </p>
       </div>

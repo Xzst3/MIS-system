@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { PrivacyNoticeLink } from "./privacy-notice-link";
 import { useState } from "react";
 import { ArrowUpRight, CheckCircle2, Heart, ShieldCheck } from "lucide-react";
 import { services } from "@/lib/content";
@@ -199,7 +200,10 @@ export function IntakeForm({
         <span>
           I agree that The Elder Care Foundation may store these details and
           contact me about this request. Read our{" "}
-          <Link href="/privacy">privacy notice</Link>.
+          <PrivacyNoticeLink
+            returnLabel={isDonation ? "Back to my pledge" : "Back to my form"}
+          />
+          .
         </span>
       </label>
       {error && (

@@ -66,7 +66,9 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
             </Link>
           </nav>
           <Link href="/donate" className="button button-dark nav-donate">
-            Give a little good <Heart size={15} />
+            <span className="donate-desktop-label">Give a little good</span>
+            <span className="donate-mobile-label">Give</span>
+            <Heart size={15} />
           </Link>
           <button
             className="menu-button"

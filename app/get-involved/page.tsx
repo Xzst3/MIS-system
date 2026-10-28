@@ -18,7 +18,7 @@ export default function Page() {
         </p>
       </section>
       <section className="shell page-content">
-        <div className="wide-photo">
+        <div className="wide-photo involvement-photo">
           <img
             src="/images/a-community-beside-you.webp"
             alt="A volunteer and an older man walking and talking in a sunny garden"
