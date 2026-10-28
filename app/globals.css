@@ -1244,6 +1244,40 @@ textarea:focus-visible {
 .login-box .button {
   width: 100%;
 }
+.password-field {
+  position: relative;
+}
+.field .password-input {
+  padding-right: 56px;
+}
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--green);
+}
+.password-toggle:hover {
+  background: var(--sage);
+}
+.password-toggle:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: -2px;
+}
+/* The custom reveal button is shared across browsers. */
+.login-box input::-ms-reveal,
+.login-box input::-ms-clear {
+  display: none;
+}
 .login-help {
   font-size: 16px;
   text-align: center;

@@ -98,10 +98,14 @@ export function AuthForm({ activate = false }: { activate?: boolean }) {
                 />
               </label>
             )}
-            <label className="field">
-              {activate ? "Create a password" : "Password"}
-              <div style={{ position: "relative" }}>
+            <div className="field">
+              <label htmlFor="account-password">
+                {activate ? "Create a password" : "Password"}
+              </label>
+              <div className="password-field">
                 <input
+                  id="account-password"
+                  className="password-input"
                   name="password"
                   type={show ? "text" : "password"}
                   autoComplete={activate ? "new-password" : "current-password"}
@@ -111,19 +115,23 @@ export function AuthForm({ activate = false }: { activate?: boolean }) {
                   placeholder={
                     activate ? "At least 12 characters" : "Enter your password"
                   }
-                  style={{ paddingRight: 45 }}
                 />
                 <button
                   type="button"
-                  className="icon-button"
-                  style={{ position: "absolute", right: 7, top: 7 }}
+                  className="password-toggle"
                   aria-label={show ? "Hide password" : "Show password"}
-                  onClick={() => setShow(!show)}
+                  aria-controls="account-password"
+                  aria-pressed={show}
+                  onClick={() => setShow((visible) => !visible)}
                 >
-                  {show ? <EyeOff size={17} /> : <Eye size={17} />}
+                  {show ? (
+                    <EyeOff size={21} aria-hidden="true" />
+                  ) : (
+                    <Eye size={21} aria-hidden="true" />
+                  )}
                 </button>
               </div>
-            </label>
+            </div>
             {activate && (
               <label className="field">
                 Confirm password

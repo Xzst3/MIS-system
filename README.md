@@ -46,6 +46,14 @@ Next.js loads .env.local for serving. The migration command loads it explicitly.
 
 Run npm run accounts:seed once after configuring the database. This creates four fictional username/password accounts: admin, coordinator, fundraising and volunteer. Private generated passwords are saved in .local/TEST_ACCOUNTS.md and are never committed. No real email address is required. The bootstrap is resumable and never changes existing account passwords.
 
+## Temporary cloud workspace data
+
+A small, user-requested batch populates the protected cloud workspace while the detailed data flow is being designed. It contains 27 synthetic business records with ordinary English labels: six clients, five donors, four referrals, three partners, three volunteer profiles and six assigned tasks. Reserved example.org addresses do not identify real contacts. These records are not public claims or real payments.
+
+Run npm run workspace:seed explicitly to insert this batch. It is never run by builds or deployments. Stable UUIDs make reruns idempotent and preserve any edits. The private .local/workspace-seed-manifest.json records the exact IDs for later cleanup.
+
+When this batch is no longer needed, npm run workspace:clear previews the matching counts without changing anything. After reviewing, npm run workspace:clear -- --apply removes only the fixed batch IDs, including any edits made to those records. Separately created records, public submissions, accounts and audit history remain intact.
+
 ## Additional administrator invitations
 
 Run this after a deployment URL is known:
