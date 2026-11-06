@@ -5,14 +5,17 @@ if (!process.env.DATABASE_URL) {
   process.exit(0);
 }
 const sql = neon(process.env.DATABASE_URL);
-const statements = readFileSync(
-  new URL("../db/schema.sql", import.meta.url),
-  "utf8",
-)
-  .split(";")
-  .map((s) => s.trim())
-  .filter(Boolean);
-await sql.transaction(statements.map((s) => sql.query(s)));
+for (const file of ["schema.sql", "operations.sql", "finance.sql"]) {
+  const source = readFileSync(
+    new URL("../db/" + file, import.meta.url),
+    "utf8",
+  );
+  const statements = source
+    .split(file === "schema.sql" ? ";" : "-- statement-breakpoint")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  await sql.transaction(statements.map((s) => sql.query(s)));
+}
 await sql`DELETE FROM rate_limits WHERE expires_at<NOW()`;
 await sql`DELETE FROM sessions WHERE expires_at<NOW()`;
 await sql`DELETE FROM invitations WHERE expires_at<NOW()`;

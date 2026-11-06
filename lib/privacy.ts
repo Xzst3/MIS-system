@@ -1,11 +1,11 @@
 export const privacySections = [
   {
     title: "What we collect",
-    text: "Our public forms collect your name, email address, selected area of interest and, for a donation pledge, your chosen amount. We record your consent and the time of your request. Please do not submit medical records, identity numbers or financial documents.",
+    text: "Our public forms collect your name, email address and selected area of interest. The interactive giving checkout also records your chosen amount, designation and a transaction reference. We record consent and request time. Please do not submit medical records, identity numbers or financial documents.",
   },
   {
     title: "How we use it",
-    text: "Authorized foundation team members use your details to review your request, coordinate an appropriate response and manage related administration. A pledge is a record of interest; we do not collect card details or process a payment through these forms.",
+    text: "Authorized foundation team members use your details to review your request, coordinate a response and maintain related service and contribution records. The interactive giving checkout does not collect card details or charge money. Foundation updates are optional and are recorded separately from request-related contact.",
   },
   {
     title: "Where information is stored",

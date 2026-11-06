@@ -39,6 +39,14 @@ import { demoData, demoUser, emptyData } from "@/lib/demo-data";
 import type { Dataset, RecordRow, Role, User } from "@/lib/types";
 const navigation = [
   { key: "overview", label: "Overview", icon: LayoutDashboard },
+  { key: "services", label: "Service journey", icon: Waypoints },
+  { key: "finance", label: "Finance & approvals", icon: Heart },
+  {
+    key: "transparency",
+    label: "Funding transparency",
+    icon: ChartNoAxesCombined,
+  },
+  { key: "people", label: "People & engagements", icon: Users },
   { key: "clients", label: "Clients & cases", icon: Users },
   { key: "referrals", label: "Referrals", icon: Waypoints },
   { key: "donors", label: "Donors & giving", icon: Heart },
@@ -99,7 +107,6 @@ const statuses = [
   "Pending",
   "In progress",
   "Completed",
-  "Pledged",
   "Received",
   "Contacted",
   "Archived",

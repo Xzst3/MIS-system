@@ -173,14 +173,6 @@ export function AuthForm({ activate = false }: { activate?: boolean }) {
               ? "Invitation links can only be used once."
               : "Need access or a password reset? Contact your foundation administrator for an invitation."}
           </div>
-          {!activate && (
-            <div className="login-demo">
-              <p>Exploring the workspace before getting started?</p>
-              <Link className="text-link" href="/demo">
-                Take a look around the demo <ArrowUpRight size={16} />
-              </Link>
-            </div>
-          )}
         </div>
       </section>
     </div>

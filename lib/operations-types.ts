@@ -1,0 +1,81 @@
+export type Person = {
+  id: string;
+  name: string;
+  email: string | null;
+  phone: string;
+  entity_type: "person" | "organization";
+  notes: string;
+  communication_consent: boolean;
+  username: string | null;
+  account_id: string | null;
+};
+export type Engagement = {
+  id: string;
+  person_id: string;
+  role: "employee" | "volunteer" | "donor" | "beneficiary";
+  status: "Pending" | "Active" | "Ended";
+  starts_on: string;
+  ends_on: string | null;
+  weekdays: number[];
+  onboarding_complete: boolean;
+  screening_complete: boolean;
+  training_complete: boolean;
+  qualification_expires_on: string | null;
+  notes: string;
+};
+export type Service = {
+  id: string;
+  beneficiary_id: string;
+  beneficiary: string;
+  program_id: string;
+  program_name: string;
+  service_type: string;
+  title: string;
+  service_date: string;
+  assigned_to: string | null;
+  assignee: string | null;
+  status: string;
+  provider: string;
+  notes: string;
+  outcome: string;
+};
+export type Hours = {
+  id: string;
+  engagement_id: string;
+  engagement_role: string;
+  person: string;
+  service_id: string | null;
+  service_title: string | null;
+  service_date: string;
+  hours: number;
+  description: string;
+  status: string;
+  submitted_by: string;
+  submitter: string;
+  reviewer: string | null;
+  review_note: string;
+};
+export type OperationsData = {
+  intakes: {
+    id: string;
+    kind: string;
+    name: string;
+    email: string;
+    category: string;
+    person_id: string | null;
+    service_id: string | null;
+    reviewed_at: string | null;
+    created_at: string;
+  }[];
+  people: Person[];
+  engagements: Engagement[];
+  services: Service[];
+  hours: Hours[];
+  programs: { id: string; name: string; code: string }[];
+  accounts: {
+    id: string;
+    name: string;
+    username: string;
+    person_id: string | null;
+  }[];
+};

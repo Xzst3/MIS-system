@@ -1,70 +1,67 @@
 import type { Metadata } from "next";
-import { Heart, Compass, Users, ArrowUpRight } from "lucide-react";
-import { PublicShell } from "@/components/public-shell";
-import { IntakeForm } from "@/components/intake-form";
+import { Compass, Heart, Waypoints } from "lucide-react";
+import { PublicShell, ArrowLink } from "@/components/public-shell";
+import { GivingCheckout } from "@/components/giving-checkout";
 export const metadata: Metadata = { title: "Give a little good" };
 export default function Page() {
-  const checkout = process.env.NEXT_PUBLIC_DONATION_URL;
   return (
     <PublicShell>
-      <section className="shell form-layout">
-        <div className="form-intro">
-          <span className="eyebrow">SMALL ACTS. MEANINGFUL CHANGE.</span>
+      <section className="shell giving-layout">
+        <div className="giving-story">
+          <span className="eyebrow">GENEROSITY, WITH A CLEAR PURPOSE</span>
           <h1>
             A little generosity.
             <br />
-            <em>A brighter chapter.</em>
+            <em>A clearer way forward.</em>
           </h1>
-          <p>
-            Help us build an information and navigation network that makes aging
-            feel less overwhelming for older adults and their families.
+          <p className="large-copy">
+            Help older adults find the information, connections and practical
+            support that make the next chapter easier.
           </p>
-          <div style={{ marginTop: 35 }}>
+          <a href="#giving-checkout" className="button button-dark giving-skip">
+            Make a gift
+          </a>
+          <div className="giving-story-photo">
+            <img
+              src="/images/service-transport.webp"
+              alt="An older adult and a volunteer preparing for an accompanied journey"
+            />
+          </div>
+          <div className="giving-principles">
             {[
               [
                 Compass,
-                "Clearer information",
-                "Support accessible guidance and practical navigation resources.",
+                "A purpose for every gift",
+                "Choose a service area or let the foundation direct support where it is needed most.",
               ],
               [
-                Users,
-                "Stronger connections",
-                "Help connect people with relevant services and external professionals.",
+                Waypoints,
+                "A traceable journey",
+                "Our team records each contribution, reviews its use and connects spending to the work it supports.",
               ],
               [
                 Heart,
-                "A foundation for the future",
-                "Be part of building a thoughtful, sustainable charitable network.",
+                "People at the centre",
+                "Your generosity supports guidance, referrals, transport and the everyday work behind them.",
               ],
-            ].map(([Icon, t, d]) => {
+            ].map(([Icon, title, copy]) => {
               const I = Icon as typeof Compass;
               return (
-                <div className="task-item" key={String(t)}>
-                  <I size={22} strokeWidth={1.3} />
-                  <div>
-                    <strong style={{ fontSize: 18 }}>{String(t)}</strong>
-                    <p style={{ fontSize: 16 }}>{String(d)}</p>
-                  </div>
+                <div key={String(title)}>
+                  <I size={24} strokeWidth={1.4} />
+                  <span>
+                    <strong>{String(title)}</strong>
+                    <p>{String(copy)}</p>
+                  </span>
                 </div>
               );
             })}
           </div>
-          <div className="notice">
-            No goods or services are promised in exchange for a pledge. We do
-            not make any claim about tax deductibility. Donation processing and
-            receipting will be confirmed by the foundation.
-          </div>
-          {checkout && /^https:\/\//.test(checkout) && (
-            <a
-              className="button button-dark"
-              href={checkout}
-              rel="noopener noreferrer"
-            >
-              Open secure donation checkout <ArrowUpRight size={17} />
-            </a>
-          )}
+          <ArrowLink href="/get-involved">
+            Giving an item or exploring a partnership?
+          </ArrowLink>
         </div>
-        <IntakeForm kind="donation" />
+        <GivingCheckout />
       </section>
     </PublicShell>
   );

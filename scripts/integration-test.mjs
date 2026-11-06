@@ -160,27 +160,40 @@ try {
     ).status === 200,
   );
   const intake = await request("/api/intake", {
-    kind: "donation",
+    kind: "support",
     name: "ECF Integration Test",
     email: email("public"),
-    category: "General giving",
-    amount: 50,
+    category: "Nutrition planning",
     consent: true,
     website: "",
   });
-  check("public pledge is saved", intake.status === 200);
+  check("public appointment request is saved", intake.status === 200);
+  const intakeData = await (
+    await request("/api/records", null, cookies.coordinator)
+  ).json();
+  check(
+    "public request appears in shared staff database",
+    intakeData.clients.some(
+      (d) => d.email === email("public") && d.status === "New",
+    ),
+  );
+  const donor = await request(
+    "/api/records",
+    {
+      kind: "donors",
+      name: "ECF Contact Test",
+      email: email("public"),
+      category: "Individual giving",
+      status: "Contacted",
+      detail: "Contact coordination",
+      amount: 50,
+    },
+    cookies.fundraising,
+  );
+  check("fundraising can create a legacy contact record", donor.status === 200);
   const donorData = await (
     await request("/api/records", null, cookies.fundraising)
   ).json();
-  check(
-    "public pledge appears in shared staff database",
-    donorData.donors.some(
-      (d) =>
-        d.email === email("public") &&
-        d.status === "Pledged" &&
-        Number(d.amount) === 50,
-    ),
-  );
   const pledge = donorData.donors.find((d) => d.email === email("public"));
   check(
     "fundraising can edit donor details",
@@ -194,7 +207,7 @@ try {
           name: "ECF Updated Test",
           email: email("public"),
           category: "Individual giving",
-          status: "Pledged",
+          status: "Contacted",
           detail: "Updated test note",
           amount: 75,
         },
@@ -221,7 +234,7 @@ try {
           name: "ECF Blocked Test",
           email: email("public"),
           category: "Test",
-          status: "Pledged",
+          status: "Contacted",
           detail: "",
           amount: 1,
         },
@@ -353,6 +366,8 @@ try {
         sql`DELETE FROM audit_log WHERE user_id IN (SELECT id FROM users WHERE username=ANY(${usernames}))`,
         sql`DELETE FROM records WHERE created_by IN (SELECT id FROM users WHERE username=ANY(${usernames})) OR email=ANY(${emails})`,
         sql`DELETE FROM submissions WHERE email=ANY(${emails})`,
+        sql`DELETE FROM person_engagements WHERE person_id IN(SELECT id FROM people WHERE email=ANY(${emails}))`,
+        sql`DELETE FROM people WHERE email=ANY(${emails})`,
         sql`DELETE FROM users WHERE username=ANY(${usernames})`,
         sql`DELETE FROM rate_limits WHERE key LIKE ANY(${patterns}::text[])`,
       ]);

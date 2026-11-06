@@ -1,4 +1,5 @@
-export type Role = "admin" | "coordinator" | "fundraising" | "volunteer";
+export type Role =
+  "admin" | "finance" | "coordinator" | "fundraising" | "volunteer";
 export type User = { id: string; name: string; username: string; role: Role };
 export type RecordRow = {
   id: string;

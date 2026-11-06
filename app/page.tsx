@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { PublicShell, ArrowLink } from "@/components/public-shell";
 import { services, resources } from "@/lib/content";
+import { serviceDetails } from "@/lib/service-details";
 export default function Home() {
   return (
     <PublicShell>
@@ -145,10 +146,21 @@ export default function Home() {
           <div className="service-grid">
             {services.slice(0, 3).map((s, i) => (
               <Link
-                className="service-card reveal"
+                className="service-card with-photo reveal"
                 key={s.slug}
                 href={"/services#" + s.slug}
               >
+                <div className="home-service-photo">
+                  <img
+                    src={
+                      "/images/service-" +
+                      serviceDetails[s.slug].image +
+                      ".webp"
+                    }
+                    alt={serviceDetails[s.slug].alt}
+                    loading="lazy"
+                  />
+                </div>
                 <span className="service-index">0{i + 1}</span>
                 <s.icon className="service-icon" size={34} strokeWidth={1.3} />
                 <h3>{s.name}</h3>

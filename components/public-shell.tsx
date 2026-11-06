@@ -49,7 +49,7 @@ export function PublicShell({ children }: { children: React.ReactNode }) {
           >
             {[
               ["Our story", "/about"],
-              ["How we help", "/services"],
+              ["Our services", "/services"],
               ["Resources", "/resources"],
               ["Get involved", "/get-involved"],
             ].map(([text, href]) => (

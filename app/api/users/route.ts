@@ -77,7 +77,13 @@ export async function POST(request: Request) {
           .min(3)
           .max(32)
           .regex(/^[a-zA-Z0-9][a-zA-Z0-9._-]+$/),
-        role: z.enum(["admin", "coordinator", "fundraising", "volunteer"]),
+        role: z.enum([
+          "admin",
+          "finance",
+          "coordinator",
+          "fundraising",
+          "volunteer",
+        ]),
       })
       .parse(body);
     const token = randomBytes(32).toString("hex");
