@@ -4,6 +4,7 @@ import { z } from "zod";
 import { currentUser, sameOrigin } from "@/lib/auth";
 import { database } from "@/lib/db";
 import type { Role } from "@/lib/types";
+import { expenseCategories } from "@/lib/report-config";
 const canEnter = (role: Role) =>
   ["admin", "finance", "coordinator", "fundraising"].includes(role);
 const kinds = [
@@ -50,6 +51,9 @@ const input = z.object({
   external_reference: z.string().trim().max(150).optional(),
   settlement_confirmed: z.boolean().default(false),
   description: z.string().trim().min(5).max(1000),
+  expense_category: z
+    .enum(Object.keys(expenseCategories) as [string, ...string[]])
+    .default("uncategorized"),
 });
 function cents(value: string) {
   const [whole, fraction = ""] = value.split(".");
@@ -263,8 +267,8 @@ export async function POST(request: Request) {
       id.slice(0, 8).toUpperCase();
     const inserted = await sql.transaction([
       sql.query(
-        `INSERT INTO finance_requests(id,reference,client_reference,kind,amount_cents,currency,event_date,fund_id,to_fund_id,person_id,service_id,item_id,quantity,item_name,external_reference,settlement_confirmed,description,submitted_by)
-    VALUES($1,$2,$3,$4,$5,'USD',$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17) ON CONFLICT(client_reference) DO NOTHING RETURNING id`,
+        `INSERT INTO finance_requests(id,reference,client_reference,kind,amount_cents,currency,event_date,fund_id,to_fund_id,person_id,service_id,item_id,quantity,item_name,external_reference,settlement_confirmed,description,submitted_by,expense_category)
+    VALUES($1,$2,$3,$4,$5,'USD',$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18) ON CONFLICT(client_reference) DO NOTHING RETURNING id`,
         [
           id,
           reference,
@@ -283,6 +287,7 @@ export async function POST(request: Request) {
           data.settlement_confirmed,
           data.description,
           user.id,
+          data.kind === "expense" ? data.expense_category : "uncategorized",
         ],
       ),
       sql.query(
@@ -316,6 +321,8 @@ export async function POST(request: Request) {
           : String(prior.event_date)
         ).slice(0, 10) !== data.event_date ||
         prior.description !== data.description ||
+        prior.expense_category !==
+          (data.kind === "expense" ? data.expense_category : "uncategorized") ||
         (prior.external_reference || "") !== (data.external_reference || "") ||
         prior.settlement_confirmed !== data.settlement_confirmed
       )

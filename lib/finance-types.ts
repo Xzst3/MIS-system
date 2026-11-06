@@ -42,6 +42,7 @@ export type FinanceRequest = {
   submitted_by: string | null;
   reviewed_by: string | null;
   review_note: string;
+  expense_category: string;
   reviewed_at: string | null;
   created_at: string;
   submitter: string;

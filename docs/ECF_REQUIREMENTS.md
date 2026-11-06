@@ -1,6 +1,6 @@
 # ECF connected workspace — agreed scope
 
-Updated 6 November 2026. This is an interim implementation before the group's revised ER model is available.
+Updated 6 November 2026. The group’s ER diagram and dictionary have now been reviewed; see `ERD_ALIGNMENT.md` for the field-by-field coverage and explicit gaps.
 
 ## Source and scope
 
@@ -59,10 +59,14 @@ The latest giving decision supersedes the QR/third-party-only proposal: the publ
 - Sample budgets, qualification flags and example business figures are fictional bootstrap data for the user-requested preview. They must not be treated as real ECF financial or personnel evidence.
 - Email is currently a unique contact matching key. Shared household/organization email cases and full reviewed profile merging need a policy and the forthcoming ER model. Person UUIDs and all transaction references should be preserved during that migration.
 - The initial fund list consists of general support, seven service designations and operations. Programmes, delegated limits, annual budgets, outcome definitions, evidence retention and document handling remain subject to ECF validation.
-- List views load the latest 1,000 financial requests, 3,000 posting lines and 300 intake receipts. Core fund balances and dashboard aggregates query all posted/source records; full large-volume drill-down pagination is a later extension.
+- Older finance/intake list views load the latest 1,000 financial requests, 3,000 posting lines and 300 intake receipts. The new Reports & impact queries all matching rows for its metrics, paginates 25 rows per page, and exports up to 20,000 matches with an explicit size error beyond that limit. The funding trace now computes complete source totals separately and paginates ledger details.
 - No pledge workflow is used by the public checkout or new dashboard. Historical legacy records are retained rather than silently converted into received money.
 - The old `/demo` entry redirects to the authenticated `/workspace` so users see the current connected experience.
 
 ## Validation
 
 `npm test` checks role boundaries. `scripts/integration-test.mjs` checks authentication, legacy record permissions, public intake and account lifecycle. `scripts/business-integration-test.mjs` checks the connected financial/service/person workflows against the configured Neon database through a localhost server, including concurrency and exact scoped fixture cleanup. Source types and production compilation are checked separately.
+
+## Dated reporting extension
+
+See [stakeholder questions and acceptance](ECF_DASHBOARD_QUESTIONS.md) for fifteen practical questions, transcript timestamps, user additions, comparison rules and exact Neon provenance. See [ERD mapping](ERD_ALIGNMENT.md) for all seventeen supplied business entities and the operational extensions retained.

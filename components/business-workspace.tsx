@@ -30,6 +30,7 @@ import { canAccess } from "@/lib/permissions.mjs";
 import type { User } from "@/lib/types";
 import { FinanceWorkspace, Metric } from "./finance-workspace";
 import { PeopleWorkspace } from "./people-workspace";
+import { ReportsWorkspace } from "./reports-workspace";
 import { LoadState, dollars, send, useRemote } from "./business-ui";
 const nav = [
   ["overview", "Overview", LayoutDashboard],
@@ -227,8 +228,10 @@ export function BusinessWorkspace({
               Shared foundation records
             </span>
           </div>
-          {view === "overview" || view === "reports" ? (
-            <BusinessOverview user={user} reports={view === "reports"} />
+          {view === "reports" ? (
+            <ReportsWorkspace user={user} />
+          ) : view === "overview" ? (
+            <BusinessOverview user={user} reports={false} />
           ) : view === "finance" || view === "transparency" ? (
             <FinanceWorkspace
               user={user}
@@ -368,6 +371,12 @@ function BusinessOverview({ user, reports }: { user: User; reports: boolean }) {
           </div>
           {(m
             ? [
+                [
+                  "What did we sell in the previous two months?",
+                  "Compare complete months and open each asset-sale record.",
+                  "/workspace/reports?report=sales&period=previous_2_months",
+                  ChartNoAxesCombined,
+                ],
                 [
                   "Where did a contribution go?",
                   "Follow its original source, fund transfers and expenditure.",

@@ -91,3 +91,11 @@ Integration scripts reject non-localhost targets. They exercise the actual conne
 Seven new service photographs were generated with the built-in image generation tool and saved as optimized WebP in `public/images/service-*.webp`. Exact prompts and reviews are in [docs/SERVICE_IMAGE_ASSETS.md](docs/SERVICE_IMAGE_ASSETS.md). Earlier image provenance is in docs/IMAGE_ASSETS.md. Editorial images illustrate service navigation and do not identify actual clients or staff.
 
 Push `main` to the connected GitHub repository to trigger Vercel. Keep `.env.local`, `.local`, dependencies, build files and private credentials out of Git. The application remains an interim prototype: real payment-provider/bank reconciliation, payroll, international FX, procurement and a complete statutory accounting model are outside this release.
+
+## Reporting and ER alignment
+
+Reports & impact supports complete calendar-month and custom date ranges, explicitly dated comparisons, contributions, asset sales, expense categories, allocations, source-funded services, donor history, services/outcomes, employee/volunteer hours and as-of inventory. Metrics use the full matching Neon population; screen rows are paginated and CSV exports use the same filters. Funding trace reads `ecf_funding_provenance`, reconciles complete source amounts and paginates the movement history.
+
+- [Stakeholder questions and definitions](docs/ECF_DASHBOARD_QUESTIONS.md)
+- [Mapping of the supplied ER diagram](docs/ERD_ALIGNMENT.md)
+- Read-only report checks: `node --env-file-if-exists=.env.local scripts/reports-integration-test.mjs` (localhost only).

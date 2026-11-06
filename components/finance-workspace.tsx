@@ -23,6 +23,8 @@ import type {
   FinanceRequest,
 } from "@/lib/finance-types";
 import { financeLabels } from "@/lib/finance-types";
+import { expenseCategories } from "@/lib/report-config";
+import { FundingTrace } from "./funding-trace";
 import {
   BusinessModal,
   LoadState,
@@ -71,6 +73,8 @@ export function FinanceWorkspace({
     )
       setTab(target);
     const name = params.get("person");
+    const source = params.get("source");
+    if (source) setTrace(source);
     if (name) {
       setQuery(name);
       setTab("transactions");
@@ -178,10 +182,10 @@ export function FinanceWorkspace({
       (tab !== "approvals" || r.status === "Submitted"),
   );
   const gifts = posted.filter((r) =>
-    ["cash_donation", "asset_sale"].includes(r.kind),
+    ["cash_donation", "asset_sale", "in_kind"].includes(r.kind),
   );
   const gift = gifts.find((r) => r.id === trace) || gifts[0];
-  const path = gift ? data.postings.filter((p) => p.lot_id === gift.id) : [];
+  const traceSource = trace || gift?.id || "";
   function exportRows() {
     if (!data) return;
     const headers = [
@@ -595,9 +599,12 @@ export function FinanceWorkspace({
           <label className="field trace-gift-select">
             Choose a posted contribution
             <select
-              value={gift?.id || ""}
+              value={traceSource}
               onChange={(e) => setTrace(e.target.value)}
             >
+              {traceSource && !gifts.some((r) => r.id === traceSource) && (
+                <option value={traceSource}>Selected contribution</option>
+              )}
               {gifts.map((r) => (
                 <option key={r.id} value={r.id}>
                   {r.person_name ||
@@ -607,97 +614,21 @@ export function FinanceWorkspace({
               ))}
             </select>
           </label>
-          {gift ? (
-            <>
-              <div className="trace-origin">
-                <Heart size={30} />
-                <div>
-                  <span className="eyebrow">ORIGINAL CONTRIBUTION</span>
-                  <h3>{gift.person_name || path[0]?.donor}</h3>
-                  <p>
-                    {gift.reference} · {dollars(gift.amount_cents)} ·{" "}
-                    {gift.fund_name}
-                  </p>
-                </div>
-                <Status value={gift.status} />
-              </div>
-              <div className="business-table-wrap">
-                <table className="business-table">
-                  <thead>
-                    <tr>
-                      <th>Transaction</th>
-                      <th>Fund</th>
-                      <th>Movement</th>
-                      <th>Service / beneficiary</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {path
-                      .slice()
-                      .reverse()
-                      .map((p) => (
-                        <tr key={p.id}>
-                          <td>
-                            <button
-                              className="business-detail-button"
-                              onClick={() => {
-                                const r = data.requests.find(
-                                  (r) => r.id === p.request_id,
-                                );
-                                if (r) setSelected(r);
-                              }}
-                            >
-                              {p.request_reference}
-                              <ArrowUpRight size={15} />
-                            </button>
-                            <small>
-                              {financeLabels[p.kind as FinanceKind]}
-                            </small>
-                          </td>
-                          <td>{p.fund_name}</td>
-                          <td
-                            className={
-                              p.delta_cents < 0 ? "negative" : "positive"
-                            }
-                          >
-                            {p.delta_cents > 0 ? "+" : ""}
-                            {dollars(p.delta_cents)}
-                          </td>
-                          <td>
-                            {p.service_title ||
-                              (p.kind === "expense"
-                                ? "Shared / operational support"
-                                : "Fund movement")}
-                            <small>
-                              {p.beneficiary ||
-                                "Purpose recorded at fund level"}
-                            </small>
-                          </td>
-                        </tr>
-                      ))}
-                  </tbody>
-                </table>
-              </div>
-              <div className="business-info">
-                <Waypoints size={21} />
-                <span>
-                  Remaining from this contribution:{" "}
-                  <strong>
-                    {dollars(path.reduce((n, p) => n + p.delta_cents, 0))}
-                  </strong>
-                  . Transfers conserve the amount; only expenses consume it. The
-                  oldest posted contribution available on the transaction date
-                  is used first, with its original donor reference retained.
-                  In-kind stock and distributions remain separately traceable in
-                  inventory.
-                </span>
-              </div>
-            </>
+          {traceSource ? (
+            <FundingTrace key={traceSource} source={traceSource} />
           ) : (
             <Empty>
-              A posted contribution will appear here after independent approval.
+              A contribution will appear here after independent approval.
             </Empty>
           )}
+          <p className="report-definition">
+            Choose from recent contributions above, or search the complete dated
+            history in{" "}
+            <Link href="/workspace/reports?report=transactions&amp;period=all_time">
+              Reports &amp; impact
+            </Link>
+            .
+          </p>
         </>
       )}
       {rules && (
@@ -854,6 +785,23 @@ export function FinanceWorkspace({
                     </span>
                   </label>
                 )}
+                {requestKind === "expense" && (
+                  <label className="field">
+                    Expense category
+                    <select name="expense_category" required defaultValue="">
+                      <option value="" disabled>
+                        Choose an expense category
+                      </option>
+                      {Object.entries(expenseCategories)
+                        .filter(([k]) => k !== "uncategorized")
+                        .map(([k, v]) => (
+                          <option key={k} value={k}>
+                            {v}
+                          </option>
+                        ))}
+                    </select>
+                  </label>
+                )}
                 {requestKind === "in_kind" && (
                   <label className="field">
                     Item / asset name
@@ -983,6 +931,15 @@ export function FinanceWorkspace({
           <dl className="business-definition">
             <dt>Transaction date</dt>
             <dd>{dateText(selected.event_date)}</dd>
+            {selected.kind === "expense" && (
+              <>
+                <dt>Expense category</dt>
+                <dd>
+                  {expenseCategories[selected.expense_category] ||
+                    "Uncategorized"}
+                </dd>
+              </>
+            )}
             <dt>Source / purpose</dt>
             <dd>{selected.person_name || selected.submitter}</dd>
             {selected.submitted_name && (
@@ -1047,6 +1004,22 @@ export function FinanceWorkspace({
               </>
             )}
           </dl>
+          {selected.status === "Posted" &&
+            ["cash_donation", "asset_sale", "in_kind"].includes(
+              selected.kind,
+            ) &&
+            data.scope !== "own" && (
+              <button
+                className="button button-outline"
+                onClick={() => {
+                  setTrace(selected.id);
+                  setSelected(null);
+                  setTab("trace");
+                }}
+              >
+                Trace original contribution <Waypoints size={18} />
+              </button>
+            )}
           {selected.status === "Submitted" && canReview ? (
             selected.submitted_by === user.id ? (
               <div className="business-info">
