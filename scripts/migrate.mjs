@@ -5,7 +5,13 @@ if (!process.env.DATABASE_URL) {
   process.exit(0);
 }
 const sql = neon(process.env.DATABASE_URL);
-for (const file of ["schema.sql", "operations.sql", "finance.sql", "reporting.sql"]) {
+for (const file of [
+  "schema.sql",
+  "operations.sql",
+  "finance.sql",
+  "reporting.sql",
+  "custom-reports.sql",
+]) {
   const source = readFileSync(
     new URL("../db/" + file, import.meta.url),
     "utf8",

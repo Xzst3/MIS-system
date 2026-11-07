@@ -12,7 +12,7 @@ The public site introduces the foundation and its seven service areas with origi
 
 The connected workspace includes beneficiary journeys, service records, a shared people directory, employee/volunteer/donor engagements, hours review, fund balances, independently reviewed financial requests, restricted allocations, annual budgets, inventory and gift-to-expenditure traceability. The dashboard distinguishes posted amounts, pending requests, estimated in-kind value, completed services and approved volunteer hours.
 
-The selected requirements, business rules, source/status, owners, priorities, acceptance evidence and provisional boundaries are recorded in [docs/ECF_REQUIREMENTS.md](docs/ECF_REQUIREMENTS.md). The group's forthcoming ER design may refine these structures.
+The selected requirements, business rules, source/status, owners, priorities, acceptance evidence and provisional boundaries are recorded in [docs/ECF_REQUIREMENTS.md](docs/ECF_REQUIREMENTS.md). The supplied ER design and current implementation mapping are documented below.
 
 ## Development
 
@@ -41,8 +41,9 @@ Use Node 22 or later.
 - `audit_log`: attributable decisions and changes; shared contact edits retain before/after JSON details.
 - `records`: retained first-phase contacts, partner directory and task records. Monetary values in this legacy table are not the new financial ledger.
 - `rate_limits`: persistent request counters.
+- `saved_reports`: owner-private custom report definitions, versions and reversible archive state.
 
-Schema sources are `db/schema.sql`, `db/operations.sql` and `db/finance.sql`. The latter files use explicit statement breakpoints to preserve database functions. Calendar DATE values stay as YYYY-MM-DD strings; timestamps remain timestamps.
+Schema sources are `db/schema.sql`, `db/operations.sql`, `db/finance.sql`, `db/reporting.sql` and `db/custom-reports.sql`. The latter files use explicit statement breakpoints to preserve database functions. Calendar DATE values stay as YYYY-MM-DD strings; timestamps remain timestamps.
 
 ## Roles
 
@@ -99,3 +100,7 @@ Reports & impact supports complete calendar-month and custom date ranges, explic
 - [Stakeholder questions and definitions](docs/ECF_DASHBOARD_QUESTIONS.md)
 - [Mapping of the supplied ER diagram](docs/ERD_ALIGNMENT.md)
 - Read-only report checks: `node --env-file-if-exists=.env.local scripts/reports-integration-test.mjs` (localhost only).
+
+Custom reports add ordered fields, typed filters, one or two groupings, validated measures, charts, CSV and owner-private saved configurations in Neon. Reopening saved settings always queries current data. See the [custom report guide](docs/CUSTOM_REPORTS.md).
+
+- Custom report checks: `node --env-file=.env.local scripts/custom-reports-integration-test.mjs` (localhost only; removes its own test settings).

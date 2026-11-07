@@ -9,6 +9,7 @@ import {
   RefreshCw,
   Search,
   Waypoints,
+  Plus,
 } from "lucide-react";
 import type { User } from "@/lib/types";
 import {
@@ -28,6 +29,8 @@ import {
   timeText,
 } from "./business-ui";
 import { FundingTrace } from "./funding-trace";
+import { CustomReportBuilder } from "./custom-report-builder";
+import Link from "next/link";
 const periods = {
   previous_2_months: "Previous 2 complete months",
   rolling_2_months: "Last 2 months to today",
@@ -67,6 +70,14 @@ type Fields = {
   q: string;
 };
 export function ReportsWorkspace({ user }: { user: User }) {
+  const params = useSearchParams();
+  return params.get("mode") === "custom" ? (
+    <CustomReportBuilder user={user} />
+  ) : (
+    <StandardReportsWorkspace user={user} />
+  );
+}
+function StandardReportsWorkspace({ user }: { user: User }) {
   const params = useSearchParams(),
     router = useRouter();
   const allowed = (Object.keys(reportDefinitions) as ReportId[]).filter((r) =>
@@ -257,6 +268,15 @@ export function ReportsWorkspace({ user }: { user: User }) {
   };
   return (
     <>
+      <div className="report-mode-toolbar">
+        <p>Start with a standard question or build your own report.</p>
+        <Link
+          className="button button-dark"
+          href="/workspace/reports?mode=custom"
+        >
+          <Plus size={18} /> Create report
+        </Link>
+      </div>
       <div className="report-navigation">
         <label className="field">
           Choose a report
