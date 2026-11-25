@@ -32,6 +32,19 @@ import {
 } from "./business-ui";
 import { Metric } from "./finance-workspace";
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+const peopleRoles = [
+  ["beneficiary", "Beneficiaries"],
+  ["donor", "Donors"],
+  ["employee", "Employees"],
+  ["volunteer", "Volunteers"],
+] as const satisfies ReadonlyArray<readonly [Engagement["role"], string]>;
+
+const initialRoleByView: Partial<Record<string, Engagement["role"]>> = {
+  clients: "beneficiary",
+  donors: "donor",
+  volunteers: "volunteer",
+};
 export function PeopleWorkspace({ user, view }: { user: User; view: string }) {
   const params = useSearchParams();
   const [intake, setIntake] = useState<
@@ -40,15 +53,13 @@ export function PeopleWorkspace({ user, view }: { user: User; view: string }) {
   const remote = useRemote<OperationsData>("/api/operations");
   const { data } = remote;
   const [query, setQuery] = useState("");
-  const [filter, setFilter] = useState(
-    view === "donors"
-      ? "donor"
-      : view === "volunteers"
-        ? "volunteer"
-        : view === "clients"
-          ? "beneficiary"
-          : "",
+  const [selectedRoles, setSelectedRoles] = useState<Engagement["role"][]>(
+    () => {
+      const initialRole = initialRoleByView[view];
+      return initialRole ? [initialRole] : [];
+    },
   );
+  const [activeOnly, setActiveOnly] = useState(false);
   const [tab, setTab] = useState(
     view === "services" || view === "referrals" ? "services" : "people",
   );
@@ -129,24 +140,53 @@ export function PeopleWorkspace({ user, view }: { user: User; view: string }) {
         onRetry={remote.refresh}
       />
     );
+  const engagementsByPerson = new Map<string, Engagement[]>();
+  for (const engagement of data.engagements) {
+    const current = engagementsByPerson.get(engagement.person_id);
+    if (current) current.push(engagement);
+    else engagementsByPerson.set(engagement.person_id, [engagement]);
+  }
   const own = data.people.find((p) => p.account_id === user.id);
-  const ownEngagements = data.engagements.filter(
-    (e) =>
-      e.person_id === own?.id &&
-      ["employee", "volunteer"].includes(e.role) &&
-      e.status === "Active",
+  const ownEngagements = (engagementsByPerson.get(own?.id ?? "") ?? []).filter(
+    (e) => ["employee", "volunteer"].includes(e.role) && e.status === "Active",
   );
-  const people = data.people.filter(
-    (p) =>
-      (!filter ||
-        data.engagements.some(
-          (e) => e.person_id === p.id && e.role === filter,
-        )) &&
-      (!query ||
-        (p.name + " " + p.email + " " + p.username)
-          .toLowerCase()
-          .includes(query.toLowerCase())),
-  );
+
+  const currentDate = today();
+  const peopleQuery = query.trim().toLowerCase();
+  const searchableProfiles = data.people
+    .filter((p) =>
+      [p.name, p.email, p.username]
+        .join(" ")
+        .toLowerCase()
+        .includes(peopleQuery),
+    )
+    .map((profile) => {
+      const engagements = engagementsByPerson.get(profile.id) ?? [];
+      const countedRoles = new Set(
+        engagements
+          .filter(
+            (e) =>
+              !activeOnly ||
+              (e.status === "Active" &&
+                e.starts_on <= currentDate &&
+                (!e.ends_on || e.ends_on >= currentDate)),
+          )
+          .map((e) => e.role),
+      );
+      return { profile, countedRoles };
+    })
+    .filter(({ countedRoles }) => !activeOnly || countedRoles.size > 0);
+  const roleCounts = { beneficiary: 0, donor: 0, employee: 0, volunteer: 0 };
+  for (const { countedRoles } of searchableProfiles) {
+    for (const role of countedRoles) roleCounts[role]++;
+  }
+  const people = searchableProfiles
+    .filter(({ countedRoles }) =>
+      selectedRoles.every((role) => countedRoles.has(role)),
+    )
+    .map(({ profile }) => profile);
+  const profileCount = (count: number) =>
+    `${count} ${count === 1 ? "profile" : "profiles"}`;
   const services = data.services.filter(
     (s) =>
       (view !== "referrals" || s.service_type === "Referral") &&
@@ -338,38 +378,86 @@ export function PeopleWorkspace({ user, view }: { user: User; view: string }) {
         </>
       ) : tab === "people" ? (
         <>
-          <div className="business-info">
-            <Users size={23} />
-            <span>
-              A person can be an employee on weekdays, a volunteer at weekends
-              and a donor at any time. Each engagement keeps its own dates,
-              availability and eligibility; it does not enroll anyone in
-              payroll.
-            </span>
-          </div>
-          <div className="business-filters">
-            <label className="business-search">
-              <Search size={19} />
-              <input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                aria-label="Search people"
-                placeholder="Search a name, email or username"
-              />
-            </label>
-            <select
-              aria-label="Filter by engagement"
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
+          <section
+            className="people-directory-filters"
+            aria-labelledby="people-counts-heading"
+          >
+            <h2 id="people-counts-heading">Profiles by role</h2>
+            <p>
+              Select one or more roles to find profiles with all selected roles.
+            </p>
+            <div
+              className="people-role-filters"
+              role="group"
+              aria-label="Filter profiles by role"
             >
-              <option value="">All engagements</option>
-              {["beneficiary", "donor", "employee", "volunteer"].map((r) => (
-                <option key={r} value={r}>
-                  {r[0].toUpperCase() + r.slice(1)}
-                </option>
+              <button
+                type="button"
+                className="people-role-filter"
+                aria-pressed={selectedRoles.length === 0}
+                onClick={() => setSelectedRoles([])}
+              >
+                <span>All profiles</span>
+                <strong>{searchableProfiles.length}</strong>
+              </button>
+              {peopleRoles.map(([role, label]) => (
+                <button
+                  type="button"
+                  key={role}
+                  className="people-role-filter"
+                  aria-pressed={selectedRoles.includes(role)}
+                  onClick={() =>
+                    setSelectedRoles((current) =>
+                      current.includes(role)
+                        ? current.filter((value) => value !== role)
+                        : [...current, role],
+                    )
+                  }
+                >
+                  <span>{label}</span>
+                  <strong>{roleCounts[role]}</strong>
+                </button>
               ))}
-            </select>
-          </div>
+            </div>
+            <div className="business-filters people-directory-search">
+              <label className="business-search">
+                <Search size={19} />
+                <input
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  aria-label="Search people"
+                  placeholder="Search a name, email or username"
+                />
+              </label>
+              <label className="people-active-filter">
+                <input
+                  type="checkbox"
+                  checked={activeOnly}
+                  onChange={(e) => setActiveOnly(e.target.checked)}
+                />
+                Active roles only
+              </label>
+            </div>
+            <p
+              className="people-filter-result"
+              role="status"
+              aria-atomic="true"
+            >
+              <strong>
+                {profileCount(people.length)} match
+                {people.length === 1 ? "es" : ""}
+              </strong>
+              {selectedRoles.length > 0 && (
+                <span>
+                  {" · "}
+                  {peopleRoles
+                    .filter(([role]) => selectedRoles.includes(role))
+                    .map(([, label]) => label)
+                    .join(" + ")}
+                </span>
+              )}
+            </p>
+          </section>
           <div className="business-table-wrap">
             <table className="business-table">
               <thead>
@@ -392,18 +480,14 @@ export function PeopleWorkspace({ user, view }: { user: User; view: string }) {
                     </td>
                     <td>
                       <div className="engagement-chips">
-                        {data.engagements
-                          .filter((e) => e.person_id === p.id)
-                          .map((e) => (
-                            <span key={e.id} title={e.status}>
-                              {e.role}
-                              <i
-                                className={
-                                  e.status === "Active" ? "active" : ""
-                                }
-                              />
-                            </span>
-                          ))}
+                        {(engagementsByPerson.get(p.id) ?? []).map((e) => (
+                          <span key={e.id} title={e.status}>
+                            {e.role}
+                            <i
+                              className={e.status === "Active" ? "active" : ""}
+                            />
+                          </span>
+                        ))}
                       </div>
                     </td>
                     <td>
@@ -428,10 +512,7 @@ export function PeopleWorkspace({ user, view }: { user: User; view: string }) {
               </tbody>
             </table>
             {!people.length && (
-              <Empty>
-                No matching profiles. Reuse an existing person before adding
-                another engagement.
-              </Empty>
+              <Empty>No profiles match the selected roles and search.</Empty>
             )}
           </div>
         </>

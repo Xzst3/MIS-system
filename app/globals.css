@@ -4552,6 +4552,68 @@ textarea:focus-visible {
 .business-table .positive {
   color: #6b8b4d;
 }
+.people-directory-filters {
+  margin-bottom: 18px;
+}
+.people-directory-filters h2 {
+  margin-bottom: 8px;
+  font-size: clamp(26px, 3vw, 34px);
+}
+.people-role-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 136px), 1fr));
+  gap: 10px;
+  margin-block: 18px;
+}
+.people-role-filter {
+  display: grid;
+  gap: 5px;
+  justify-items: start;
+  padding: 13px 15px;
+  border: 1px solid #dce3d1;
+  border-radius: 9px;
+  background: var(--paper);
+  color: var(--green);
+  font-size: 16px;
+  text-align: left;
+  cursor: pointer;
+}
+.people-role-filter:hover {
+  background: #f0f4e9;
+}
+.people-role-filter[aria-pressed="true"] {
+  border-color: var(--green);
+  box-shadow: inset 0 -3px var(--green);
+  background: #e3ebdc;
+}
+.people-role-filter strong {
+  color: var(--green);
+  font-size: 29px;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+.people-directory-search {
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.people-active-filter {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 9px;
+  color: var(--green);
+  font-size: 16px;
+  cursor: pointer;
+}
+.people-active-filter input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--green);
+}
+.people-filter-result {
+  color: var(--green);
+  font-variant-numeric: tabular-nums;
+}
 .engagement-chips {
   display: flex;
   gap: 7px;
