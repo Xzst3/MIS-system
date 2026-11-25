@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { Compass, Heart, Waypoints } from "lucide-react";
 import { PublicShell, ArrowLink } from "@/components/public-shell";
-import { GivingCheckout } from "@/components/giving-checkout";
+import Link from "next/link";
 export const metadata: Metadata = { title: "Give a little good" };
 export default function Page() {
   return (
     <PublicShell>
       <section className="shell giving-layout">
-        <div className="giving-story">
+        <div className="giving-story giving-intro">
           <span className="eyebrow">GENEROSITY, WITH A CLEAR PURPOSE</span>
           <h1>
             A little generosity.
@@ -18,9 +18,26 @@ export default function Page() {
             Help older adults find the information, connections and practical
             support that make the next chapter easier.
           </p>
-          <a href="#giving-checkout" className="button button-dark giving-skip">
-            Make a gift
-          </a>
+        </div>
+        <section className="giving-qr" aria-labelledby="giving-qr-title">
+          <h2 id="giving-qr-title">Scan to give</h2>
+          <p>Scan with your phone camera to open the giving page.</p>
+          <Link href="/donate/checkout" className="giving-qr-image">
+            <img
+              src="/images/donation-qr.png"
+              alt="QR code to open the donation preview"
+              width={492}
+              height={492}
+            />
+          </Link>
+          <Link href="/donate/checkout" className="button button-dark">
+            Open donation preview
+          </Link>
+          <p className="giving-qr-note">
+            Preview only. No payment is collected.
+          </p>
+        </section>
+        <div className="giving-details">
           <div className="giving-story-photo">
             <img
               src="/images/service-transport.webp"
@@ -61,7 +78,6 @@ export default function Page() {
             Giving an item or exploring a partnership?
           </ArrowLink>
         </div>
-        <GivingCheckout />
       </section>
     </PublicShell>
   );

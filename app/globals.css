@@ -3611,8 +3611,9 @@ textarea:focus-visible {
 /* Connected operations and service storytelling */
 .giving-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas: "intro qr" "details qr";
+  column-gap: 80px;
   padding-block: 76px 100px;
   align-items: start;
 }
@@ -4715,7 +4716,7 @@ textarea:focus-visible {
     display: none;
   }
   .giving-layout {
-    gap: 40px;
+    column-gap: 40px;
   }
   .giving-card form,
   .giving-complete {
@@ -4737,7 +4738,8 @@ textarea:focus-visible {
 }
 @media (max-width: 900px) {
   .giving-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "intro" "qr" "details";
     max-width: 700px;
     gap: 35px;
     padding-top: 45px;
@@ -4987,13 +4989,51 @@ textarea:focus-visible {
     font-size: 14px;
   }
 }
-.giving-skip {
-  display: none;
+.giving-intro {
+  grid-area: intro;
+}
+.giving-details {
+  grid-area: details;
+}
+.giving-qr {
+  grid-area: qr;
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+  text-align: center;
+  padding-top: 28px;
+}
+.giving-qr h2 {
+  font-size: clamp(32px, 4vw, 48px);
+}
+.giving-qr-image {
+  display: block;
+  max-width: 100%;
+  width: 280px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.giving-qr-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: inherit;
+}
+.giving-qr-note {
+  font-size: 16px;
+}
+.giving-checkout-page {
+  max-width: 700px;
+  padding-block: 48px 76px;
+}
+.giving-checkout-page h1 {
+  font-size: clamp(38px, 5vw, 60px);
+  margin: 18px 0 24px;
 }
 @media (max-width: 900px) {
-  .giving-skip {
-    display: inline-flex;
-    margin-top: 24px;
+  .giving-qr {
+    padding-top: 0;
   }
 }
 /* Dated reporting and complete donor-source histories. */
